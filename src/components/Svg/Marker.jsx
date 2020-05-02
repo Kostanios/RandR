@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Marker = ({ perc }) => {
+  perc = perc || 10;
   return (
     <svg width="50px" height="50px" viewBox="0 0 42 42" className="donut" aria-labelledby="beers-title beers-desc" role="img">
       <circle className="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="white" role="presentation"></circle>

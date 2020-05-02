@@ -1,22 +1,21 @@
-import { createSlice, createAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { INITIAL_LATLON } from 'utils/constants/map';
 import {
-  LOADED,
+  SET_LOADED,
   SET_LOCATION,
   SET_IS_CONNECTED,
-  SET_BOTTOM_SHEET
+  SET_BOTTOM_SHEET,
+  SET_NAVIGATION_VISIBILITY
 } from 'utils/constants/reducers';
-
-export const setIsConnected = createAction(SET_IS_CONNECTED);
-export const loaded = createAction(LOADED);
-export const setLocation = createAction(SET_LOCATION);
-export const setBottomSheet = createAction(SET_BOTTOM_SHEET);
+import md from 'utils/mobileDetector';
 
 export const appSlice = createSlice({
   name: 'app',
   initialState: {
     isConnected: false,
     isLoaded: false,
+    isMobile: md.mobile() !== null,
+    isNavigationVisible: true,
     location: {
       latitude: INITIAL_LATLON.latitude,
       longitude: INITIAL_LATLON.longitude
@@ -28,22 +27,33 @@ export const appSlice = createSlice({
     }
   },
   reducers: {
-    [setIsConnected]: (state, action) => {
+    [SET_IS_CONNECTED]: (state, action) => {
       state.isConnected = action.payload;
     },
-    [loaded]: (state, action) => {
+    [SET_LOADED]: (state, action) => {
       state.isLoaded = action.payload;
     },
-    [setLocation]: (state, action) => {
+    [SET_LOCATION]: (state, action) => {
       state.location = {
         latitude: action.payload.latitude,
         longitude: action.payload.longitude
       };
     },
-    [setBottomSheet]: (state, action) => {
-      state.bottonSheet = action.payload;
+    [SET_BOTTOM_SHEET]: (state, action) => {
+      state.bottomSheet = action.payload;
+    },
+    [SET_NAVIGATION_VISIBILITY]: (state, action) => {
+      state.isNavigationVisible = action.payload;
     }
   },
 });
+
+export const {
+  setIsConnected,
+  setLoaded,
+  setLocation,
+  setBottomSheet,
+  setNavigationVisibility
+} = appSlice.actions
 
 export default appSlice.reducer;

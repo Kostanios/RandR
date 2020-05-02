@@ -1,14 +1,20 @@
 // application
-export const LOADED = 'LOADED';
-export const LOGINED = 'LOGINED';
-export const SET_LOCATION = 'SET_LOCATION';
-export const SET_IS_CONNECTED = 'SET_IS_CONNECTED';
-export const SET_BOTTOM_SHEET = 'SET_BOTTOM_SHEET';
+export const SET_LOADED = 'setLoaded';
+export const SET_LOGINED = 'setLogined';
+export const SET_LOCATION = 'setLocation';
+export const SET_IS_CONNECTED = 'setIsConnected';
+export const SET_BOTTOM_SHEET = 'setBottomSheet';
+export const SET_NAVIGATION_VISIBILITY = 'setNavigationVisibility';
 
 // user
-export const SET_JWT = 'SET_JWT';
-export const SET_PHONE_NUMBER = 'SET_PHONE_NUMBER';
-export const LOG_IN = 'LOG_IN';
-export const CONFIRM_JWT = 'CONFIRM_JWT';
-export const CONFIRM_OTP = 'CONFIRM_OTP';
-export const SET_COMPONENT = 'auth/SET_COMPONENT';
+export const SET_JWT = 'setJwt';
+export const SET_PHONE_NUMBER = 'setPhoneNumber';
+export const LOG_IN = 'logIn';
+export const CONFIRM_JWT = 'confirmJwt';
+export const CONFIRM_OTP = 'confirmOtp';
+export const SET_AUTH_COMPONENT = 'setAuthComponent';
+
+// global window
+export const SET_GLOBAL_WINDOW_COMPONENT = 'setGlobalWindowComponent';
+export const UPDATE_GLOBAL_WINDOW_COMPONENT = 'updateGlobalWindowComponent';
+export const CLEAR_GLOBAL_WINDOW_COMPONENT = 'clearGlobalWindowComponent';

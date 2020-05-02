@@ -1,0 +1,53 @@
+@import 'utils/constants/variables.scss';
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 80px;
+  padding: 0 25px;
+  font-size: 26px;
+  background-color: $background-color-white;
+  box-shadow: $box-shadow;
+  .left, .right, .center {
+    display: flex;
+    align-items: center;
+  }
+  .center {
+    justify-content: center;
+    flex: 1;
+  }
+  .left, .right {
+    flex: 2;
+  }
+  .left {
+    justify-content: flex-start;
+  }
+  .right {
+    justify-content: flex-end;
+  }
+}
+.logoContainer {
+  width: 64px;
+  height: 64px;
+  margin: 0 20px;
+  color: $text-color-main;
+}
+.textLink, .button {
+  text-decoration: none;
+  color: $text-color-main;
+  cursor: pointer;
+  &.active {
+    color: $text-color-green;
+  }
+  &:hover {
+    color: $text-color-green-hover;
+  }
+  &:active {
+    color: $text-color-green-pressed;
+  }
+}
+.logInLink {
+  
+}

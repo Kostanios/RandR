@@ -2,17 +2,19 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
+// eslint-disable-next-line
 import styles from './styles.module.scss';
 
 const Map = ReactMapboxGl({
   accessToken:
-    'pk.eyJ1IjoiYW50b25zb2xvZGtvZiIsImEiOiJjazlraHczenUwaDYzM2hwOGJ1OWp4dzhxIn0.1okx0XI9FfV9g-NQZtVpLA'
+    'pk.eyJ1IjoiYW50b25zb2xvZGtvZiIsImEiOiJjazlvNnYwbGcwNzdrM2xtcjA5YjY5NGQ2In0.7pHzxrf9nSmgKVqYL5awaQ'
 });
 
 const MapComponent = () => {
   const { latitude, longitude } = useSelector(state => state.app.location);
   return (
     <Map
+      // eslint-disable-next-line
       style="mapbox://styles/mapbox/streets-v10"
       center={[longitude, latitude]}
       containerStyle={{

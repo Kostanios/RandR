@@ -1,6 +1,6 @@
-import { createSlice, createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import AuthAPI from 'api/auth';
-import { SET_JWT, LOGINED, CONFIRM_JWT, CONFIRM_OTP, LOG_IN, SET_PHONE_NUMBER } from 'utils/constants/reducers';
+import { SET_JWT, SET_LOGINED, CONFIRM_JWT, CONFIRM_OTP, LOG_IN, SET_PHONE_NUMBER, SET_AUTH_COMPONENT } from 'utils/constants/reducers';
 import { messages } from 'utils/constants/response';
 import { COMPONENT_CONFIRM_OTP, COMPONENT_LOG_IN } from 'utils/constants/components';
 
@@ -30,10 +30,6 @@ export const confirmOtpThunk = createAsyncThunk(CONFIRM_OTP, async (otp, { getSt
   return response.data;
 })
 
-export const setJwt = createAction(SET_JWT);
-export const setIsLogined = createAction(LOGINED);
-export const setPhoneNumber = createAction(SET_PHONE_NUMBER);
-
 export const authSlice = createSlice({
   name: 'auth',
   initialState: {
@@ -47,14 +43,17 @@ export const authSlice = createSlice({
     currentComponent: COMPONENT_LOG_IN
   },
   reducers: {
-    [setJwt]: (state, action) => {
+    [SET_JWT]: (state, action) => {
       state.jwt = action.payload;
     },
-    [setPhoneNumber]: (state, action) => {
+    [SET_PHONE_NUMBER]: (state, action) => {
       state.phoneNumber = action.payload;
     },
-    [setIsLogined]: (state, action) => {
+    [SET_LOGINED]: (state, action) => {
       state.isLogined = action.payload;
+    },
+    [SET_AUTH_COMPONENT]: (state, action) => {
+      state.currentComponent = action.payload || COMPONENT_LOG_IN;
     }
   },
   extraReducers: {
@@ -116,5 +115,12 @@ export const authSlice = createSlice({
     },
   }
 });
+
+export const {
+  setAuthComponent,
+  setJwt,
+  setIsLogined,
+  setPhoneNumber
+} = authSlice.actions;
 
 export default authSlice.reducer;

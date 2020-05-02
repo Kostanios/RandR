@@ -1,0 +1,30 @@
+$_beige: #E0D5C3;
+$_navy: #3A2960;
+$_white: #FFFFFF;
+$_white-dirty: #FFFDFD;
+$_black: #000000;
+$_black-light: #323234;
+$_green: rgb(214, 255, 67);
+$_green-hover: darken($_green, 15%);
+$_green-pressed: darken($_green, 25%);
+$_gray: #C9CACD;
+$_gray-middle: #E9E9EA;
+$_gray-light: #EFEFEF;
+
+$text-color-main: $_black-light;
+$text-color-gray: $_gray;
+$text-color-gray-middle: $_gray-middle;
+$text-color-green: $_green;
+$text-color-green-hover: $_green-hover;
+$text-color-green-pressed: $_green-pressed;
+
+$background-color-main: $_green;
+$background-color-main-hover: $_green-hover;
+$background-color-main-pressed: $_green-pressed;
+$background-color-white: $_white;
+$background-color-white-dirty: $_white-dirty;
+$background-color-black: $_black;
+$background-color-gray: $_gray-light;
+$background-color-navy: $_navy;
+
+$box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.1);
