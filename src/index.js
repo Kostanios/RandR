@@ -4,6 +4,7 @@ import App from './containers/App';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import 'swiper/swiper.scss'
 import './index.scss';
 
 ReactDOM.render(

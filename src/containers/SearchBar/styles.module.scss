@@ -1,0 +1,64 @@
+@import 'utils/constants/variables.scss';
+.searchWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  height: 40px;
+  width: 60vw;
+}
+
+.searchBarContainer {
+  display: flex;
+  align-items: center;
+  width: calc(100% - 40px);
+  height: 35px;
+  border-radius: 17.5px;
+  background-color: $background-color-white;
+  box-shadow: $box-shadow;
+  transition: $border-transition-2s;
+  border: 1px solid $border-color-gray-light;
+  &.focused {
+    border: 1px solid $border-color-green-hover !important;
+  }
+  &:hover {
+    border: 1px solid $border-color-green;
+  }
+}
+
+.searchBarInput {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 0 15px;
+  font-size: 16px;
+  color: $text-color-main;
+  outline: 0;
+  border: none;
+  border-radius: inherit;
+}
+
+.searchIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  color: $text-color-white;
+  background-color: $background-color-main;
+  transition: $background-color-transition-2s;
+  cursor: pointer;
+  &:hover {
+    background-color: $text-color-green-hover;
+  }
+  &:active {
+    background-color: $text-color-green-pressed;
+  }
+}
+
+@media(max-width: 640px) {
+  .searchWrapper {
+    width: 100%;
+  }
+}

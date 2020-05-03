@@ -1,19 +1,31 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import {
+  useRouteMatch,
+  Switch,
+  Route
+} from "react-router-dom";
 import LogIn from './LogIn';
-import ConfirmOtp from './ConfirmOtp';
-import { COMPONENT_CONFIRM_OTP, COMPONENT_LOG_IN } from 'utils/constants/components';
+import Verification from './ConfirmOtp';
+import Registration from './Registration';
+import { REGISTRATION_ROUTE, VERIFICATION_ROUTE } from 'utils/constants/routeNames';
+import styles from './styles.module.scss';
 
 const Auth = () => {
-  const components = {
-    [COMPONENT_LOG_IN]: LogIn,
-    [COMPONENT_CONFIRM_OTP]: ConfirmOtp
-  }
-  const curComponentName = useSelector(state => state.auth.currentComponent);
-  const Component = components[curComponentName || COMPONENT_LOG_IN];
-
+  const routeMatch = useRouteMatch();
   return (
-    <Component />
+    <div className={styles.authWrapper}>
+      <Switch>
+        <Route path={`${routeMatch.path}/${VERIFICATION_ROUTE}`}>
+          <Verification />
+        </Route>
+        <Route path={`${routeMatch.path}/${REGISTRATION_ROUTE}`}>
+          <Registration />
+        </Route>
+        <Route path={routeMatch.path}>
+          <LogIn />
+        </Route>
+      </Switch>
+    </div>
   );
 };
 

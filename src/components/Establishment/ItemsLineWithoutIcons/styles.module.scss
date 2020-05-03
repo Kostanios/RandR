@@ -1,0 +1,25 @@
+@import 'utils/constants/variables.scss';
+.itemsLineWithoutIcons {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  width: 100%;
+  .item {
+    display: flex;
+    align-items: center;
+    &Devider {
+      width: 3px;
+      height: 3px;
+      margin: 1px 4px 0;
+      border-radius: 50%;
+      background-color: $background-color-gray-dark;
+    }
+    &Text {
+      font-weight: 600;
+      font-size: 8px;
+      line-height: 10px;
+      color: $text-color-gray-dark
+    }
+  }
+}

@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { COMPONENT_AUTH } from 'utils/constants/components';
 import { clearGlobalWindowComponent } from 'redux/slices/globalWindowSlice';
-import Auth from 'containers/Auth';
 import CloseIcon from 'components/Svg/CloseIcon';
 import styles from './styles.module.scss';
 import './transition.scss';
 
 const GlobalWindowWrapper = () => {
-  const components = {
-    [COMPONENT_AUTH]: Auth
-  }
+  const components = {}
   const componentConfig = useSelector(state => state.globalWindow.component);
   const isModalOpen = componentConfig && componentConfig.name;
   if (!isModalOpen) return (<div></div>)

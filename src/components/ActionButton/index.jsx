@@ -15,11 +15,10 @@ const ActionButton = ({
 }) => {
   return (
     <div
-      style={{ disabled }}
-      className={[ styles.button, disabled ? styles.buttonDisabled : null ]}
+      className={`${styles.button} ${disabled ? styles.buttonDisabled : ''}`}
       onClick={() => disabled ? false : callback()}
     >
-      { buttonText }
+      <div className={styles.buttonText}>{buttonText}</div>
     </div>
   );
 };

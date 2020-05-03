@@ -1,0 +1,27 @@
+@import 'utils/constants/variables.scss';
+.feedWrapper {
+  // height: 400px;
+  overflow: hidden;
+}
+
+.feedChildrenWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  // overflow: hidden;
+}
+
+.feedTape {
+  display: flex;
+  &Vertical {
+    flex-direction: column;
+  }
+}
+
+.feedHeading {
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  color: $text-color-main;
+}

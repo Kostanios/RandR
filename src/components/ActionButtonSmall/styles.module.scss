@@ -1,9 +1,33 @@
-@import 'index.scss';
-
+@import "utils/constants/variables";
 .button {
-  text-align: 'center'
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 26px;
+  width: 140px;
+  border-radius: 10px;
+  background-color: $background-color-main;
+  transition: $background-color-transition-2s;
+  user-select: none;
+  cursor: pointer;
+  &:hover {
+    background-color: $background-color-main-hover;
+  }
+  &:active {
+    background-color: $background-color-main-pressed;
+  }
 }
-
+.buttonText {
+  font-weight: 700;
+  font-size: 12px;
+  color: $text-color-main;
+}
 .buttonDisabled {
-  background-color: gray;
+  background-color: $background-color-gray;
+  &:hover {
+    background-color: $background-color-gray;
+  }
+  &:active {
+    background-color: $background-color-gray;
+  }
 }

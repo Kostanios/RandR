@@ -10,10 +10,13 @@ $_green-pressed: darken($_green, 25%);
 $_gray: #C9CACD;
 $_gray-middle: #E9E9EA;
 $_gray-light: #EFEFEF;
+$_gray-dark: #93959A;
 
 $text-color-main: $_black-light;
 $text-color-gray: $_gray;
 $text-color-gray-middle: $_gray-middle;
+$text-color-gray-dark: $_gray-dark;
+$text-color-white: $_white;
 $text-color-green: $_green;
 $text-color-green-hover: $_green-hover;
 $text-color-green-pressed: $_green-pressed;
@@ -25,6 +28,21 @@ $background-color-white: $_white;
 $background-color-white-dirty: $_white-dirty;
 $background-color-black: $_black;
 $background-color-gray: $_gray-light;
+$background-color-gray-dark: $_gray-dark;
 $background-color-navy: $_navy;
 
+$border-color-green: $_green;
+$border-color-green-hover: $_green-hover;
+$border-color-green-pressed: $_green-pressed;
+$border-color-gray-light: $_gray-light;
+
 $box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.1);
+
+$transition-time-2s: .2s;
+$transition-time-1s: .1s;
+$background-color-transition-2s: background-color $transition-time-2s;
+$background-color-transition-1s: background-color $transition-time-1s;
+$text-color-transition-2s: color $transition-time-2s;
+$text-color-transition-1s: color $transition-time-1s;
+$border-transition-2s: border $transition-time-2s;
+$border-transition-1s: border $transition-time-1s;

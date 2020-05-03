@@ -5,10 +5,10 @@ import DiscountSvg from 'components/Svg/DiscountNav';
 import SearchSvg from 'components/Svg/SearchNav';
 import FavoriteSvg from 'components/Svg/FavoriteNav';
 import ProfileSvg from 'components/Svg/ProfileNav';
-import { DISCOUNT_ROUTE, MAP_ROUTE, FAVORITE_ROUTE, PROFILE_ROUTE } from 'utils/constants/routeNames';
+import { DISCOUNT_ROUTE, MAP_ROUTE, FAVORITE_ROUTE, PROFILE_ROUTE, AUTH_ROUTE } from 'utils/constants/routeNames';
 import styles from './styles.module.scss';
 
-export default ({ showAuthPopup }) => {
+export default ({ logined }) => {
   return (
     <div className={styles.navigation}>
       <Link className={styles.navItem} to="/">
@@ -23,7 +23,7 @@ export default ({ showAuthPopup }) => {
       <Link className={styles.navItem} to={`/${FAVORITE_ROUTE}`}>
         <FavoriteSvg />
       </Link>
-      <Link className={styles.navItem} to={`/${PROFILE_ROUTE}`}>
+      <Link className={styles.navItem} to={logined ? `/${PROFILE_ROUTE}` : `/${AUTH_ROUTE}`}>
         <ProfileSvg />
       </Link>
     </div>

@@ -9,6 +9,7 @@ export default () => {
   const phoneNumber = useSelector(state => state.auth.phoneNumber);
 
   const _setPhoneNubmer = (event) => {
+    console.log(event);
     dispatch(setPhoneNumber(event.currentTarget.value));
   };
 
@@ -22,7 +23,6 @@ export default () => {
       <input
         onChange={_setPhoneNubmer}
         value={phoneNumber}
-        className={styles.input}
         placeholder="Номер телефона"
         type="tel"
       />

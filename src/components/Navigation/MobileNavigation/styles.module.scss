@@ -18,6 +18,7 @@
   height: 40px;
   text-decoration: none;
   color: $text-color-gray;
+  transition: $text-color-transition-1s;
   cursor: pointer;
   &.active {
     color: $text-color-green;

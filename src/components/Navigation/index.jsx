@@ -1,21 +1,12 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { setAuthComponent } from 'redux/slices/authSlice';
-import { setGlobalWindowComponent } from 'redux/slices/globalWindowSlice';
-import { COMPONENT_AUTH } from 'utils/constants/components';
+import { useSelector } from 'react-redux';
 import DesktopNavigation from './DesktopNavigation';
 import MobileNavigation from './MobileNavigation';
 
 export default ({ renderMobile }) => {
-  const dispatch = useDispatch();
-  const NavComponent = renderMobile ? MobileNavigation : DesktopNavigation
-  const showAuthPopup = () => {
-    dispatch(setAuthComponent());
-    dispatch(setGlobalWindowComponent({
-      name: COMPONENT_AUTH
-    }))
-  }
+  const isLogined = useSelector(state => state.auth.isLogined)
+  const NavComponent = renderMobile ? MobileNavigation : DesktopNavigation;
   return (
-    <NavComponent showAuthPopup={showAuthPopup} />
+    <NavComponent logined={isLogined} />
   );
 };

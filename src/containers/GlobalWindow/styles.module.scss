@@ -1,6 +1,7 @@
 @import 'utils/constants/variables.scss';
 .overlay {
   position: absolute;
+  z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;

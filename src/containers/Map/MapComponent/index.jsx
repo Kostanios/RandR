@@ -2,7 +2,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
-// eslint-disable-next-line
 import styles from './styles.module.scss';
 
 const Map = ReactMapboxGl({
@@ -13,19 +12,21 @@ const Map = ReactMapboxGl({
 const MapComponent = () => {
   const { latitude, longitude } = useSelector(state => state.app.location);
   return (
-    <Map
-      // eslint-disable-next-line
-      style="mapbox://styles/mapbox/streets-v10"
-      center={[longitude, latitude]}
-      containerStyle={{
-        height: '100vh',
-        width: '100vw'
-      }}
-    >
-      <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
-        <Feature coordinates={[longitude, latitude]} />
-      </Layer>
-    </Map>
+    <div className={styles.mapWrapper}>
+      <Map
+        // eslint-disable-next-line
+        style="mapbox://styles/mapbox/streets-v9"
+        center={[longitude, latitude]}
+        containerStyle={{
+          height: '100%',
+          width: '100%'
+        }}
+      >
+        <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
+          <Feature coordinates={[longitude, latitude]} />
+        </Layer>
+      </Map>
+    </div>
   )
 }
 

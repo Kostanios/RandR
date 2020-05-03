@@ -1,18 +1,39 @@
+@import "utils/constants/variables";
 .wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  width: 100%;
-  padding: 20px 30px;
+  width: 460px;
+  padding: 20px 15px 50px;
+  border-radius: 15px;
+  background-color: $background-color-white;
+  box-shadow: $box-shadow;
 }
 .textHeading {
   margin-bottom: 30px;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 27px;
   line-height: 36px;
   text-align: center;
-  color: #B3A77D;
+  color: $text-color-main;
+}
+.input {
+  width: 290px;
+  margin-bottom: 40px;
+  font-size: 18px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 2px solid $border-color-gray-light;
+  outline: none;
+  transition: border-bottom $transition-time-2s;
+  &:hover {
+    border-bottom: 2px solid $border-color-green-hover;
+  }
+  &:focus {
+    border-bottom: 2px solid $border-color-green;
+  }
 }
 .text {
   margin-top: 20px;
