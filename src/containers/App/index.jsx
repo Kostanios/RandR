@@ -1,10 +1,11 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   BrowserRouter as Router,
-  Switch,
   Route
 } from "react-router-dom";
+import CacheRoute, { CacheSwitch } from 'react-router-cache-route'
+import { setUserLocation } from 'redux/slices/appSlice';
 import Map from 'containers/Map';
 import Home from 'containers/Home';
 import Favorite from 'containers/Favorite';
@@ -15,6 +16,26 @@ import styles from './styles.module.scss';
 import GlobalWindow from 'containers/GlobalWindow';
 
 function App() {
+  const dispatch = useDispatch();
+  function getGeolocation() {
+    function successCallback(positionObj) {
+      dispatch(setUserLocation({
+        latitude: positionObj.coords.latitude,
+        longitude: positionObj.coords.longitude
+      }))
+      console.log(positionObj);
+    }
+    function errorCallback() {
+      console.warn('geoposition disabled');
+    }
+    const options = {
+      enableHighAccuracy: true
+    }
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback, options);
+  }
+  useEffect(() => {
+    getGeolocation();
+  })
   const isMobile = useSelector(state => state.app.isMobile);
   const isNavigationVisible = useSelector(state => state.app.isNavigationVisible);
   return (
@@ -22,20 +43,12 @@ function App() {
       <div className={`${styles.wrapper} ${isMobile ? styles['wrapper--mobile'] : ''}`}>
         {isNavigationVisible && <Navigation renderMobile={isMobile} />}
         <div>
-          <Switch>
-            <Route path={`/${FAVORITE_ROUTE}`}>
-              <Favorite />
-            </Route>
-            <Route path={`/${MAP_ROUTE}`}>
-              <Map />
-            </Route>
-            <Route path={`/${AUTH_ROUTE}`}>
-              <Auth />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
+          <CacheSwitch>
+            <Route path={`/${FAVORITE_ROUTE}`} component={Favorite} />
+            <CacheRoute path={`/${MAP_ROUTE}`} when="always" component={Map} />
+            <Route path={`/${AUTH_ROUTE}`} component={Auth} />
+            <Route path="/" component={Home} />
+          </CacheSwitch>
         </div>
         <GlobalWindow />
       </div>

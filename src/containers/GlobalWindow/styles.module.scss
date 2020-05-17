@@ -2,22 +2,35 @@
 .overlay {
   position: absolute;
   z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100vw;
   height: 100vh;
   top: 0px;
   left: 0px;
   opacity: 0.01;
+  &ModalView {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 .content {
-  position: relative;
   box-sizing: border-box;
-  padding: 4px;
   z-index: 2;
   background-color: $background-color-white;
-  border-radius: 8px;
+  &LeftSide {
+    position: absolute;
+    width: 640px;
+    height: 100%;
+    top: 0;
+    left: -640px;
+    overflow: auto;
+    box-shadow: $box-shadow;
+  }
+  &ModalView {
+    position: relative;
+    padding: 4px;
+    border-radius: 8px;
+  }
 }
 .background {
   position: absolute;
@@ -30,6 +43,7 @@
 }
 .closeIcon {
   position: absolute;
+  z-index: 10;
   right: 6px;
   top: 4px;
   width: 24px;
@@ -41,6 +55,11 @@
   }
   &:active {
     color: $text-color-green-pressed;
+  }
+}
+@media(max-width: 640px) {
+  .content {
+    width: 100%;
   }
 }
 

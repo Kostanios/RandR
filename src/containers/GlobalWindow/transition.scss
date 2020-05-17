@@ -1,4 +1,16 @@
-.transition-global-window {
+.transition-global-window-in {
   opacity: 1;
-  transition: opacity .1s ease-out;
+  transition: opacity .1s ease-in;
+}
+.left-side-menu-transition-in {
+  left: 0;
+  transition: left .15s ease-in;
+}
+.transition-global-window-out {
+  opacity: 0.01;
+  transition: opacity .15s ease-out;
+}
+.left-side-menu-transition-out {
+  left: -640px;
+  transition: left .15s ease-out;
 }

@@ -1,6 +1,7 @@
 @import 'utils/constants/variables.scss';
 .cardWrapper {
   position: relative;
+  display: block;
   box-sizing: border-box;
   width: 350px;
   min-width: 350px;
@@ -8,6 +9,12 @@
   border-radius: 15px;
   overflow: hidden;
   box-shadow: $box-shadow;
+  text-decoration: none;
+  cursor: pointer;
+  transition: $box-shadow-transition-2s;
+  &:hover, &:active {
+    box-shadow: $box-shadow-green;
+  }
 }
 .cardHeader {
   width: 100%;

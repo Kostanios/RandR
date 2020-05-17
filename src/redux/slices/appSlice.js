@@ -3,6 +3,7 @@ import { INITIAL_LATLON } from 'utils/constants/map';
 import {
   SET_LOADED,
   SET_LOCATION,
+  SET_USER_LOCATION,
   SET_IS_CONNECTED,
   SET_BOTTOM_SHEET,
   SET_NAVIGATION_VISIBILITY
@@ -20,6 +21,7 @@ export const appSlice = createSlice({
       latitude: INITIAL_LATLON.latitude,
       longitude: INITIAL_LATLON.longitude
     },
+    userLocation: null,
     bottomSheet: {
       show: false,
       loaded: false,
@@ -39,6 +41,12 @@ export const appSlice = createSlice({
         longitude: action.payload.longitude
       };
     },
+    [SET_USER_LOCATION]: (state, action) => {
+      state.userLocation = {
+        latitude: action.payload.latitude,
+        longitude: action.payload.longitude
+      };
+    },
     [SET_BOTTOM_SHEET]: (state, action) => {
       state.bottomSheet = action.payload;
     },
@@ -52,6 +60,7 @@ export const {
   setIsConnected,
   setLoaded,
   setLocation,
+  setUserLocation,
   setBottomSheet,
   setNavigationVisibility
 } = appSlice.actions
