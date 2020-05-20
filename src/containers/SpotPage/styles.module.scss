@@ -18,6 +18,75 @@
     max-height: calc(100% + 20px);
   }
 }
+.headerContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 0 25px 20px;
+  color: $text-color-white;
+  .leftSide, .rightSide {
+    display: flex;
+    flex-direction: column;
+    text-shadow: $text-shadow;
+  }
+  .leftSide {
+    align-items: flex-start;
+    .rating {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 24px;
+      height: 24px;
+      margin-bottom: 2px;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 12px;
+      background-color: $background-color-black-light;
+      border: 2px solid $border-color-white;
+      border-radius: 50%;
+      overflow: hidden;
+      user-select: none;
+    }
+    .title {
+      max-width: 220px;
+      font-weight: 700;
+      font-size: 25px;
+      line-height: 33px;
+    }
+  }
+  .rightSide {
+    align-items: flex-end;
+    .morePhotos {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 65px;
+      height: 30px;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 18px;
+      background-color: rgba($background-color-black-light, .45);
+      border: 1px solid $border-color-white;
+      border-radius: 17.5px;
+      transition: $background-color-transition-2s;
+      cursor: pointer;
+      &:hover {
+        background-color: rgba($background-color-black-light, .55);
+      }
+      &:active {
+        background-color: rgba($background-color-black-light, .6);
+      }
+      .photosAmount {
+        user-select: none;
+      }
+    }
+  }
+}
 .content {
   position: relative;
   box-sizing: border-box;
@@ -30,6 +99,11 @@
     padding: 10px 0;
     color: $text-color-main;
     border-bottom: 1px solid rgba($border-color-gray, .3);
+    &Horizontal {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
     &Heading {
       margin-bottom: 4px;
       font-weight: 700;
@@ -41,5 +115,18 @@
       font-size: 12px;
       line-height: 15px;
     }
+    &Button {
+      width: 260px;
+    }
+  }
+}
+@media(max-width: 640px) {
+  .contentBlockHorizontal {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .contentBlockButton {
+    width: 100%;
+    margin: 7px 0 5px;
   }
 }

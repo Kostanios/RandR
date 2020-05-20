@@ -4,6 +4,7 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
   -moz-osx-font-smoothing: grayscale;
 }
 a {
@@ -11,19 +12,21 @@ a {
   text-decoration: inherit;
 }
 
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
- 
-::-webkit-scrollbar-thumb {
-  background: #b9b9b9;
-  border-radius: 8px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #878787; 
+@media(min-width: 641px) {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: #b9b9b9;
+    border-radius: 8px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #878787; 
+  }
 }

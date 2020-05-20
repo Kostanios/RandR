@@ -8,13 +8,15 @@ import SpotPage from 'containers/SpotPage';
 import styles from './styles.module.scss';
 import './transition.scss';
 
+const ESC_EVENT_KEY_CODE = 27;
+
 const GlobalWindowWrapper = () => {
   const components = {
     [COMPONENT_SPOT_PAGE]: SpotPage
   }
   const componentConfig = useSelector(state => state.globalWindow.component);
   const isModalOpen = componentConfig && componentConfig.name;
-  if (!isModalOpen) return (<div></div>)
+  if (!isModalOpen) return (<div style={{ position: 'absolute' }}></div>)
   const Component = components[componentConfig.name] || null;
   return (
     <GlobalWindow key={componentConfig.name}>
@@ -29,7 +31,7 @@ const GlobalWindow = ({ children }) => {
   const [contentAnimationClass, setContentAnimationClass] = useState('');
   const modalView = useSelector(state => state.globalWindow.modalView);
   const navigateBeforeClose = useSelector(state => state.globalWindow.navigateBeforeClose);
-  const onCloseWindow = () => {
+  const closeWindow = () => {
     setOverlayAnimationClass('transition-global-window-out');
     setContentAnimationClass('left-side-menu-transition-out');
     setTimeout(() => {
@@ -40,24 +42,32 @@ const GlobalWindow = ({ children }) => {
     }, 150)
   }
   useEffect(() => {
+    const escListener = (event) => {
+      if(event.keyCode === ESC_EVENT_KEY_CODE) {
+        closeWindow();
+      }
+    }
+    document.addEventListener("keydown", escListener, false);
     const timerIn = setTimeout(() => {
       setOverlayAnimationClass('transition-global-window-in');
       setContentAnimationClass('left-side-menu-transition-in');
     }, 0)
     return () => {
+      document.removeEventListener("keydown", escListener, false);
       clearTimeout(timerIn);
     }
+// eslint-disable-next-line
   }, [])
   const dispatch = useDispatch();
   return (
     <div className={`${styles.overlay} ${modalView ? styles.overlayModalView : ''} ${overlayAnimationClass}`}>
       <div className={`${styles.content} ${modalView ? styles.contentModalView : styles.contentLeftSide} ${contentAnimationClass}`}>
-        <div className={styles.closeIcon} onClick={onCloseWindow}>
+        <div className={styles.closeIcon} onClick={closeWindow}>
           <CloseIcon />
         </div>
         {children}
       </div>
-      <div className={styles.background} onClick={onCloseWindow}/>
+      <div className={styles.background} onClick={closeWindow}/>
     </div>
   );
 };

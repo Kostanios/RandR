@@ -11,11 +11,12 @@ import styles from './styles.module.scss';
 const ActionButton = ({
   callback = () => {},
   buttonText = 'Click',
+  fullWidth = false,
   disabled = false
 }) => {
   return (
     <div
-      className={`${styles.button} ${disabled ? styles.buttonDisabled : ''}`}
+      className={`${styles.button} ${disabled ? styles.buttonDisabled : ''} ${fullWidth ? styles.buttonFullWidth : ''}`}
       onClick={() => disabled ? false : callback()}
     >
       <div className={styles.buttonText}>{buttonText}</div>

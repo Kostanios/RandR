@@ -2,9 +2,9 @@ import React from 'react';
 import Swiper from 'react-id-swiper';
 import styles from './styles.module.scss';
 
-const Feed = ({ vertical, children, title }) => {
+const getSliderParams = (vertical = false) => {
   const params = {
-    slidesPerView: 4,
+    slidesPerView: 'auto',
     spaceBetween: 30,
     grabCursor: true,
     navigation: {
@@ -12,6 +12,14 @@ const Feed = ({ vertical, children, title }) => {
       prevEl: '.swiper-button-prev'
     }
   }
+  if (vertical) {
+    params.direction = 'vertical';
+  }
+  return params;
+}
+
+const Feed = ({ vertical, children, title }) => {
+  const params = getSliderParams(vertical);
   return (
     <div className={styles.feedWrapper}>
       {title && <div className={styles.feedHeading}>{title}</div>}

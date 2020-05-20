@@ -23,6 +23,9 @@
   font-size: 21px;
   color: $text-color-main;
 }
+.buttonFullWidth {
+  max-width: unset;
+}
 .buttonDisabled {
   background-color: $background-color-gray;
   &:hover {
