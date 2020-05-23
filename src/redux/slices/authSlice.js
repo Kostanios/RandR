@@ -1,34 +1,54 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import AuthAPI from 'api/auth';
-import { SET_JWT, SET_LOGINED, CONFIRM_JWT, CONFIRM_OTP, LOG_IN, SET_PHONE_NUMBER, SET_AUTH_COMPONENT } from 'utils/constants/reducers';
+import {
+  SET_JWT,
+  SET_LOGINED,
+  CONFIRM_JWT,
+  CONFIRM_OTP,
+  LOG_IN,
+  SET_PHONE_NUMBER,
+  SET_AUTH_COMPONENT,
+} from 'utils/constants/reducers';
 import { messages } from 'utils/constants/response';
-import { COMPONENT_CONFIRM_OTP, COMPONENT_LOG_IN } from 'utils/constants/components';
+import {
+  COMPONENT_CONFIRM_OTP,
+  COMPONENT_LOG_IN,
+} from 'utils/constants/components';
 
-export const logInThunk = createAsyncThunk(LOG_IN, async ({ getState }) => {
-  const { phoneNumber, isLoading } = getState().auth;
-  if (isLoading) {
-    return;
+export const logInThunk = createAsyncThunk(
+  LOG_IN,
+  async (stub, { getState }) => {
+    const { phoneNumber, isLoading } = getState().auth;
+    if (isLoading) {
+      return;
+    }
+    const response = await AuthAPI.logIn(phoneNumber);
+    return response.data;
   }
-  const response = await AuthAPI.logIn(phoneNumber);
-  return response.data;
-})
+);
 
-export const confirmJwtThunk = createAsyncThunk(CONFIRM_JWT, async (jwt, { getState }) => {
-  if (getState().auth.isLoading) {
-    return;
+export const confirmJwtThunk = createAsyncThunk(
+  CONFIRM_JWT,
+  async (jwt, { getState }) => {
+    if (getState().auth.isLoading) {
+      return;
+    }
+    const response = await AuthAPI.confirmJwt(jwt);
+    return response.data;
   }
-  const response = await AuthAPI.confirmJwt(jwt);
-  return response.data;
-})
+);
 
-export const confirmOtpThunk = createAsyncThunk(CONFIRM_OTP, async (otp, { getState }) => {
-  const { isLoading, phoneNumber } = getState().auth;
-  if (isLoading) {
-    return;
+export const confirmOtpThunk = createAsyncThunk(
+  CONFIRM_OTP,
+  async (otp, { getState }) => {
+    const { isLoading, phoneNumber } = getState().auth;
+    if (isLoading) {
+      return;
+    }
+    const response = await AuthAPI.confirmOtp({ phoneNumber, otp });
+    return response.data;
   }
-  const response = await AuthAPI.confirmOtp({ phoneNumber, otp });
-  return response.data;
-})
+);
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -40,7 +60,7 @@ export const authSlice = createSlice({
     errorMessage: '',
     isOtpSent: false,
     isLogined: false,
-    currentComponent: COMPONENT_LOG_IN
+    currentComponent: COMPONENT_LOG_IN,
   },
   reducers: {
     [SET_JWT]: (state, action) => {
@@ -54,7 +74,7 @@ export const authSlice = createSlice({
     },
     [SET_AUTH_COMPONENT]: (state, action) => {
       state.currentComponent = action.payload || COMPONENT_LOG_IN;
-    }
+    },
   },
   extraReducers: {
     [logInThunk.pending]: (state) => {
@@ -113,14 +133,14 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.errorMessage = action.error;
     },
-  }
+  },
 });
 
 export const {
   setAuthComponent,
   setJwt,
   setIsLogined,
-  setPhoneNumber
+  setPhoneNumber,
 } = authSlice.actions;
 
 export default authSlice.reducer;

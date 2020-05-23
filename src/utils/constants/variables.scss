@@ -1,16 +1,16 @@
-$_beige: #E0D5C3;
-$_navy: #3A2960;
-$_white: #FFFFFF;
-$_white-dirty: #FFFDFD;
+$_beige: #e0d5c3;
+$_navy: #3a2960;
+$_white: #ffffff;
+$_white-dirty: #fffdfd;
 $_black: #000000;
 $_black-light: #323234;
 $_green: #d6ff43;
 $_green-hover: darken($_green, 15%);
 $_green-pressed: darken($_green, 20%);
-$_gray: #C9CACD;
-$_gray-middle: #E9E9EA;
-$_gray-light: #EFEFEF;
-$_gray-dark: #93959A;
+$_gray: #c9cacd;
+$_gray-middle: #e9e9ea;
+$_gray-light: #efefef;
+$_gray-dark: #93959a;
 
 $text-color-main: $_black-light;
 $text-color-gray: $_gray;
@@ -28,7 +28,8 @@ $background-color-white: $_white;
 $background-color-white-dirty: $_white-dirty;
 $background-color-black: $_black;
 $background-color-black-light: $_black-light;
-$background-color-gray: $_gray-light;
+$background-color-gray: $_gray;
+$background-color-gray-light: $_gray-light;
 $background-color-gray-dark: $_gray-dark;
 $background-color-navy: $_navy;
 
@@ -39,13 +40,13 @@ $border-color-gray-light: $_gray-light;
 $border-color-gray: $_gray;
 $border-color-white: $_white;
 
-$box-shadow: 0px 4px 40px rgba($_black, .1);
-$box-shadow-green: 0px 2px 25px rgba($_green, .4);
+$box-shadow: 0px 4px 40px rgba($_black, 0.1);
+$box-shadow-green: 0px 2px 25px rgba($_green, 0.4);
 
 $text-shadow: 1px 1px 2px rgba($_black, 1);
 
-$transition-time-2s: .2s;
-$transition-time-1s: .1s;
+$transition-time-2s: 0.2s;
+$transition-time-1s: 0.1s;
 $background-color-transition-2s: background-color $transition-time-2s;
 $background-color-transition-1s: background-color $transition-time-1s;
 $text-color-transition-2s: color $transition-time-2s;
@@ -54,3 +55,5 @@ $border-transition-2s: border $transition-time-2s;
 $border-transition-1s: border $transition-time-1s;
 $box-shadow-transition-2s: box-shadow $transition-time-2s;
 $box-shadow-transition-1s: box-shadow $transition-time-1s;
+$opacity-transition-2s: opacity $transition-time-2s;
+$opacity-transition-1s: opacity $transition-time-1s;

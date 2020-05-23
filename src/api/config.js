@@ -1,11 +1,11 @@
 export default {
-  baseUrl: 'https://08a21202.ngrok.io',
+  baseUrl: 'http://localhost:1337',
   endpoints: {
     login: '/login',
     confirmOtp: '/confirm-otp',
     confirmJwt: '/confirm-jwt',
-    data: '/data',
-    pin: '/pin'
+    spots: '/spots',
+    pin: '/pin',
   },
-  options: { headers: { 'Content-Type': 'application/json' } }
+  options: { headers: { 'Content-Type': 'application/json' } },
 };

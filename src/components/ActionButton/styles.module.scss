@@ -1,4 +1,4 @@
-@import "utils/constants/variables";
+@import 'utils/constants/variables';
 .button {
   display: flex;
   justify-content: center;
@@ -27,11 +27,11 @@
   max-width: unset;
 }
 .buttonDisabled {
-  background-color: $background-color-gray;
+  background-color: $background-color-gray-light;
   &:hover {
-    background-color: $background-color-gray;
+    background-color: $background-color-gray-light;
   }
   &:active {
-    background-color: $background-color-gray;
+    background-color: $background-color-gray-light;
   }
 }

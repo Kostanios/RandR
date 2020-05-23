@@ -23,3 +23,6 @@ export const SET_GLOBAL_WINDOW_PARAMS = 'setGlobalWindowParams';
 
 // spots
 export const SET_CURRENT_SPOT = 'setCurrentSpot';
+export const GET_SPOTS_THUNK = 'getSpotsThunk';
+export const GET_SPOT_BY_ID_THUNK = 'getSpotByIdThunk';
+export const SET_PENDING_CARDS = 'setPendingCards';

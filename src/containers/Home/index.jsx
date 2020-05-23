@@ -1,34 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import SearchBar from 'containers/SearchBar';
 import FeedTape from 'components/Feed';
-import EstCard from 'components/Establishment/Card';
 import { SpotPageTrigger } from 'containers/SpotPage';
-import mockCards from 'mocks/cards';
+import { getSpotsThunk } from 'redux/slices/spotsSlice';
+import formSpotsCards from 'utils/formSpotsCards/index';
 import styles from './styles.module.scss';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
 export default () => {
+  const dispatch = useDispatch();
+  const spotsData = useSelector((state) => state.spots.spotsData);
+  useEffect(() => {
+    dispatch(getSpotsThunk());
+    // eslint-disable-next-line
+  }, []);
   const routeMatch = useRouteMatch();
-  const formedMockCards = mockCards.map((item) => (
-    <div className={styles.swiperItem} key={item.title + item.uid}>
-      <EstCard
-        title={item.title}
-        linkTo={`${routeMatch.url}${item.uid}`}
-        withIconsItems={item.withIconsItems}
-        withoutIconsItems={item.withoutIconsItems}
-      />
-    </div>
-  ))
+  const formedCards = formSpotsCards(routeMatch.url, spotsData);
   return (
     <div className={styles.homepage}>
       <div className={styles.searchBarWrapper}>
         <SearchBar />
       </div>
-      <FeedTape title={'Все рестораны'}>
-        {formedMockCards}
-      </FeedTape>
+      <FeedTape title={'Все рестораны'}>{formedCards}</FeedTape>
       <Switch>
-        <Route path={`${routeMatch.path}:spotUid`} component={SpotPageTrigger} />
+        <Route path={`${routeMatch.path}:spotId`} component={SpotPageTrigger} />
       </Switch>
     </div>
   );

@@ -12,13 +12,33 @@
   text-decoration: none;
   cursor: pointer;
   transition: $box-shadow-transition-2s;
-  &:hover, &:active {
+  &:hover,
+  &:active {
     box-shadow: $box-shadow-green;
+  }
+  &.stub {
+    margin-right: 30px;
+    cursor: default;
+    &::before {
+      animation: none;
+    }
+    &:hover,
+    &:active {
+      box-shadow: $box-shadow;
+    }
   }
 }
 .cardHeader {
   width: 100%;
   height: 128px;
+  opacity: 1;
+  transition: $opacity-transition-1s;
+  &.hideImageForAnimation {
+    opacity: 0.01;
+  }
+  &.stub {
+    background-color: $background-color-gray-light;
+  }
   .headerImage {
     width: 100%;
     height: 100%;
@@ -34,14 +54,55 @@
   .itemsLineWrapperWithIcons {
     margin: 5px 0 2px;
   }
+  .itemsLineWrapper.stub {
+    height: 12px;
+    margin: 5px 0 2px;
+    border-radius: 4px;
+    background-color: $background-color-gray-light;
+  }
   .cardHeading {
     font-weight: 700;
     font-size: 18px;
     color: $text-color-main;
+    &.stub {
+      width: 35%;
+      height: 18px;
+      border-radius: 4px;
+      background-color: $background-color-gray-light;
+    }
   }
 }
 .cardActionButton {
   position: absolute;
   right: 20px;
   top: -15px;
+}
+.stub {
+  position: relative;
+  overflow: hidden;
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    height: 100%;
+    width: 90%;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba($background-color-gray, 0.5) 50%,
+      rgba($background-color-gray, 0.6) 70%,
+      transparent 100%
+    );
+    animation: load 1s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+@keyframes load {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 100%;
+  }
 }
