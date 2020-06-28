@@ -1,7 +1,7 @@
 @import 'utils/constants/variables.scss';
 .overlay {
   position: absolute;
-  z-index: 10;
+  z-index: $z-index-global-window;
   width: 100vw;
   height: 100vh;
   top: 0px;
@@ -57,10 +57,8 @@
     color: $text-color-green-pressed;
   }
 }
-@media(max-width: 640px) {
+@media (max-width: 640px) {
   .content {
     width: 100%;
   }
 }
-
-

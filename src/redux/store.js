@@ -3,6 +3,7 @@ import authReducer from './slices/authSlice';
 import appReducer from './slices/appSlice';
 import globalWindowReducer from './slices/globalWindowSlice';
 import spotsSlice from './slices/spotsSlice';
+import bottomSheetSlice from './slices/bottomSheetSlice';
 
 export default configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export default configureStore({
     auth: authReducer,
     spots: spotsSlice,
     globalWindow: globalWindowReducer,
+    bottomSheet: bottomSheetSlice,
   },
 });

@@ -21,6 +21,12 @@ export const UPDATE_GLOBAL_WINDOW_COMPONENT = 'updateGlobalWindowComponent';
 export const CLEAR_GLOBAL_WINDOW_COMPONENT = 'clearGlobalWindowComponent';
 export const SET_GLOBAL_WINDOW_PARAMS = 'setGlobalWindowParams';
 
+// bottom sheet
+export const SET_BOTTOM_SHEET_COMPONENT = 'setBottomSheetComponent';
+export const UPDATE_BOTTOM_SHEET_COMPONENT = 'updateBottomSheetComponent';
+export const CLEAR_BOTTOM_SHEET_COMPONENT = 'clearBottomSheetComponent';
+export const SET_BOTTOM_SHEET_POSITION = 'setBottomSheetPosition';
+
 // spots
 export const SET_CURRENT_SPOT = 'setCurrentSpot';
 export const GET_SPOTS_THUNK = 'getSpotsThunk';

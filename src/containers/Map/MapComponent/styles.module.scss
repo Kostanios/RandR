@@ -1,4 +1,5 @@
+@import 'utils/constants/variables.scss';
 .mapWrapper {
   width: 100%;
-  height: calc(100vh - 75px);
+  height: calc(100vh - #{$mobile-navigation-height});
 }

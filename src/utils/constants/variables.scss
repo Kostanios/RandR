@@ -57,3 +57,9 @@ $box-shadow-transition-2s: box-shadow $transition-time-2s;
 $box-shadow-transition-1s: box-shadow $transition-time-1s;
 $opacity-transition-2s: opacity $transition-time-2s;
 $opacity-transition-1s: opacity $transition-time-1s;
+
+$z-index-global-window: 10;
+$z-index-mobile-navigation: $z-index-global-window - 1;
+$z-index-bottom-sheet: $z-index-global-window - 2;
+
+$mobile-navigation-height: 60px;
