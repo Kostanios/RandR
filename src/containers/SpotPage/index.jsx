@@ -19,11 +19,11 @@ const SpotPage = () => {
   const currentId = useSelector((state) => state.spots.id);
   const currentSpot = useSelector((state) => state.spots.currentSpot);
   useEffect(() => {
-    if (!currentSpot) {
+    if (typeof currentId === 'number') {
       getSpotByIdThunk(currentId);
     }
     // eslint-disable-next-line
-  }, []);
+  }, [currentId, currentSpot]);
   if (!currentSpot) {
     return <SpotPageStub />;
   }

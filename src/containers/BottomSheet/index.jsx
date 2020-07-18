@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setBottomSheetPosition } from 'redux/slices/bottomSheetSlice';
-import { COMPONENT_MAP_BOTTOM_SHEET } from 'utils/constants/components';
+import {
+  COMPONENT_MAP_BOTTOM_SHEET,
+  COMPONENT_SPOT_PAGE,
+} from 'utils/constants/components';
 import MapBottomSheet from 'containers/MapBottomSheet';
+import SpotPage from 'containers/SpotPage';
 import styles from './styles.module.scss';
 
 const BottomSheetWrapper = ({ componentName }) => {
   const components = {
     [COMPONENT_MAP_BOTTOM_SHEET]: MapBottomSheet,
+    [COMPONENT_SPOT_PAGE]: SpotPage,
   };
   const componentConfig = useSelector((state) => state.bottomSheet.component);
   const isMobile = useSelector((state) => state.app.isMobile);
-  const name = componentName || componentConfig?.name;
+  const name = componentConfig?.name || componentName;
   if (!isMobile || !name) {
     return <div style={{ position: 'absolute' }}></div>;
   }
@@ -97,7 +102,7 @@ const BottomSheet = ({ children }) => {
             />
           </div>
         </div>
-        {children}
+        <div className={styles.content}>{children}</div>
       </div>
     </div>
   );

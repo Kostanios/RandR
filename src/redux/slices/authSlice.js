@@ -15,36 +15,20 @@ import {
   COMPONENT_LOG_IN,
 } from 'utils/constants/components';
 
-export const logInThunk = createAsyncThunk(
-  LOG_IN,
-  async (stub, { getState }) => {
-    const { phoneNumber, isLoading } = getState().auth;
-    if (isLoading) {
-      return;
-    }
-    const response = await AuthAPI.logIn(phoneNumber);
-    return response.data;
-  }
-);
+export const logInThunk = createAsyncThunk(LOG_IN, async (phoneNumber) => {
+  const response = await AuthAPI.logIn(phoneNumber);
+  return response.data;
+});
 
-export const confirmJwtThunk = createAsyncThunk(
-  CONFIRM_JWT,
-  async (jwt, { getState }) => {
-    if (getState().auth.isLoading) {
-      return;
-    }
-    const response = await AuthAPI.confirmJwt(jwt);
-    return response.data;
-  }
-);
+export const confirmJwtThunk = createAsyncThunk(CONFIRM_JWT, async (jwt) => {
+  const response = await AuthAPI.confirmJwt(jwt);
+  return response.data;
+});
 
 export const confirmOtpThunk = createAsyncThunk(
   CONFIRM_OTP,
   async (otp, { getState }) => {
-    const { isLoading, phoneNumber } = getState().auth;
-    if (isLoading) {
-      return;
-    }
+    const { phoneNumber } = getState().auth;
     const response = await AuthAPI.confirmOtp({ phoneNumber, otp });
     return response.data;
   }

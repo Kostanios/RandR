@@ -1,8 +1,11 @@
 export default {
   baseUrl: 'http://localhost:1337',
+  services: {
+    auth: '/auth',
+  },
   endpoints: {
-    login: '/login',
-    confirmOtp: '/confirm-otp',
+    login: '/phone',
+    confirmOtp: '/phone-confirm',
     confirmJwt: '/confirm-jwt',
     spots: '/spots',
     pin: '/pin',

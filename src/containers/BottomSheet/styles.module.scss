@@ -6,7 +6,6 @@
   z-index: $z-index-bottom-sheet;
   width: 100vw;
   height: calc(80vh - #{$mobile-navigation-height});
-  padding: 0 4px;
   bottom: 0px;
   left: 0px;
   transform: translateY(var(--translate));
@@ -20,14 +19,24 @@
     position: relative;
   }
 }
+.content {
+  z-index: 1;
+  height: 100%;
+  overflow-y: auto;
+}
 .positionController {
   --rotate-angle: 30deg;
   position: relative;
   &Wrapper {
+    position: fixed;
+    z-index: 3;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 35px;
+    height: 40px;
+    width: 100%;
+    top: -10px;
+    left: 0;
   }
   &Button {
     position: absolute;

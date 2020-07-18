@@ -1,12 +1,40 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Layer, Feature, Image } from 'react-mapbox-gl';
+import { getSpotsThunk, setCurrentSpot } from 'redux/slices/spotsSlice';
+import {
+  setBottomSheetComponent,
+  setBottomSheetPosition,
+} from 'redux/slices/bottomSheetSlice';
+import { COMPONENT_SPOT_PAGE } from 'utils/constants/components';
 import Map from '../MapInit';
 import styles from './styles.module.scss';
 
 const MapComponent = () => {
+  const dispatch = useDispatch();
   const defaultLocation = useSelector((state) => state.app.location);
-  // const userLocation = useSelector(state => state.app.userLocation);
+  const spotsData = useSelector((state) => state.spots.spotsData) || [];
+  useEffect(() => {
+    dispatch(getSpotsThunk());
+    // eslint-disable-next-line
+  }, []);
+  console.log(spotsData);
+  const features = useMemo(
+    () =>
+      spotsData.map((spot) => (
+        <Feature
+          key={spot.id}
+          coordinates={[spot.longitude, spot.latitude]}
+          properties={{ id: spot.id }}
+          onClick={() => {
+            dispatch(setCurrentSpot({ id: spot.id }));
+            dispatch(setBottomSheetComponent({ name: COMPONENT_SPOT_PAGE }));
+            dispatch(setBottomSheetPosition(2));
+          }}
+        />
+      )),
+    [spotsData, dispatch]
+  );
   return (
     <div className={styles.mapWrapper}>
       <Map
@@ -24,9 +52,7 @@ const MapComponent = () => {
           url={`${process.env.PUBLIC_URL}/assets/pins/pizzaPin.png`}
         />
         <Layer type="symbol" layout={{ 'icon-image': 'pizza-pin' }}>
-          <Feature
-            coordinates={[defaultLocation.longitude, defaultLocation.latitude]}
-          />
+          {features}
         </Layer>
       </Map>
     </div>

@@ -6,14 +6,14 @@ import styles from './styles.module.scss';
 
 export default () => {
   const dispatch = useDispatch();
-  const phoneNumber = useSelector(state => state.auth.phoneNumber);
+  const phoneNumber = useSelector((state) => state.auth.phoneNumber);
 
   const _setPhoneNubmer = (event) => {
     dispatch(setPhoneNumber(event.currentTarget.value));
   };
 
   const _confirmPhoneNumber = () => {
-    dispatch(logInThunk());
+    dispatch(logInThunk(phoneNumber));
   };
 
   return (
@@ -26,10 +26,7 @@ export default () => {
         placeholder="Номер телефона"
         type="tel"
       />
-      <ActionButton
-        buttonText="Подтвердить"
-        callback={_confirmPhoneNumber}
-      />
+      <ActionButton buttonText="Подтвердить" callback={_confirmPhoneNumber} />
     </div>
   );
 };
