@@ -4,9 +4,7 @@ import DesktopNavigation from './DesktopNavigation';
 import MobileNavigation from './MobileNavigation';
 
 export default ({ renderMobile }) => {
-  const isLogined = useSelector(state => state.auth.isLogined)
+  const isLogined = useSelector((state) => state.auth.isLogined);
   const NavComponent = renderMobile ? MobileNavigation : DesktopNavigation;
-  return (
-    <NavComponent logined={isLogined} />
-  );
+  return <NavComponent logined={isLogined} />;
 };

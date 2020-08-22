@@ -10,3 +10,4 @@ export const MAP_ROUTE = 'map';
 export const SEARCH_ROUTE = 'search';
 export const FAVORITE_ROUTE = 'favorite';
 export const ORDER_ROUTE = 'order';
+export const RESERVATION_ROUTE = 'reservation';

@@ -1,11 +1,17 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import HomeSvg from 'components/Svg/HomeIcon';
 import DiscountSvg from 'components/Svg/DiscountNav';
 import SearchSvg from 'components/Svg/SearchNav';
 import FavoriteSvg from 'components/Svg/FavoriteNav';
 import ProfileSvg from 'components/Svg/ProfileNav';
-import { DISCOUNT_ROUTE, MAP_ROUTE, FAVORITE_ROUTE, PROFILE_ROUTE, AUTH_ROUTE } from 'utils/constants/routeNames';
+import {
+  DISCOUNT_ROUTE,
+  MAP_ROUTE,
+  FAVORITE_ROUTE,
+  PROFILE_ROUTE,
+  AUTH_ROUTE,
+} from 'utils/constants/routeNames';
 import styles from './styles.module.scss';
 
 export default ({ logined }) => {
@@ -23,7 +29,10 @@ export default ({ logined }) => {
       <Link className={styles.navItem} to={`/${FAVORITE_ROUTE}`}>
         <FavoriteSvg />
       </Link>
-      <Link className={styles.navItem} to={logined ? `/${PROFILE_ROUTE}` : `/${AUTH_ROUTE}`}>
+      <Link
+        className={styles.navItem}
+        to={logined ? `/${PROFILE_ROUTE}` : `/${AUTH_ROUTE}`}
+      >
         <ProfileSvg />
       </Link>
     </div>

@@ -6,7 +6,7 @@ import { setUserLocation } from 'redux/slices/appSlice';
 import Map from 'containers/Map';
 import Home from 'containers/Home';
 import Favorite from 'containers/Favorite';
-import Navigation from 'components/Navigation';
+import Navigation from 'containers/Navigation';
 import Auth from 'containers/Auth';
 import {
   MAP_ROUTE,
