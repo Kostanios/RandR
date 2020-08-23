@@ -3,16 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import SearchBar from 'containers/SearchBar';
 import FeedTape from 'components/Feed';
 import { SpotPageTrigger } from 'containers/SpotPage';
-import { getSpotsThunk } from 'redux/slices/spotsSlice';
+import { getDataThunk } from 'redux/slices/dataSlice';
 import formSpotsCards from 'utils/formSpotsCards/index';
 import styles from './styles.module.scss';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
 export default () => {
   const dispatch = useDispatch();
-  const spotsData = useSelector((state) => state.spots.spotsData);
+  const spotsData = useSelector((state) => state.data.spotsData);
   useEffect(() => {
-    dispatch(getSpotsThunk());
+    dispatch(getDataThunk());
     // eslint-disable-next-line
   }, []);
   const routeMatch = useRouteMatch();

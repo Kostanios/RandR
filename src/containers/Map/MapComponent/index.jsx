@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Layer, Feature, Image } from 'react-mapbox-gl';
-import { getSpotsThunk, setCurrentSpot } from 'redux/slices/spotsSlice';
+import { getDataThunk, setCurrentSpot } from 'redux/slices/dataSlice';
 import {
   setBottomSheetComponent,
   setBottomSheetPosition,
@@ -15,7 +15,7 @@ const MapComponent = () => {
   const defaultLocation = useSelector((state) => state.app.location);
   const spotsData = useSelector((state) => state.spots.spotsData) || [];
   useEffect(() => {
-    dispatch(getSpotsThunk());
+    dispatch(getDataThunk());
     // eslint-disable-next-line
   }, []);
   console.log(spotsData);

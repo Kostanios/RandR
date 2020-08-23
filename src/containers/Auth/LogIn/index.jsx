@@ -13,7 +13,8 @@ export default () => {
   };
 
   const _confirmPhoneNumber = () => {
-    dispatch(logInThunk(phoneNumber));
+    // TODO: phone validation
+    dispatch(logInThunk(String(phoneNumber)));
   };
 
   return (

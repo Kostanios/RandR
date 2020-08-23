@@ -1,36 +1,33 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import SpotAPI from 'api/spots';
+import DataAPI from 'api/data';
 import {
   SET_CURRENT_SPOT,
-  GET_SPOTS_THUNK,
+  GET_DATA_THUNK,
   GET_SPOT_BY_ID_THUNK,
 } from 'utils/constants/reducers';
 
-export const getSpotsThunk = createAsyncThunk(
-  GET_SPOTS_THUNK,
-  async (params) => {
-    const start = params ? params.start : undefined;
-    const limit = params ? params.limit : 20;
-    const response = await SpotAPI.getSpots({ start, limit });
-    return response.data;
-  }
-);
+export const getDataThunk = createAsyncThunk(GET_DATA_THUNK, async () => {
+  const { data } = await DataAPI.getData();
+  return data;
+});
 
+// TODO: remove, data.spotsData contains everything
 export const getSpotByIdThunk = createAsyncThunk(
   GET_SPOT_BY_ID_THUNK,
   async (id) => {
-    const response = await SpotAPI.getSpotById(id);
+    const response = await DataAPI.getSpotById(id);
     return response.data;
   }
 );
 
 export const spotSlice = createSlice({
-  name: 'spots',
+  name: 'data',
   initialState: {
     id: undefined,
     currentSpot: undefined,
     isLoading: false,
     spotsData: [],
+    selections: {},
   },
   reducers: {
     [SET_CURRENT_SPOT]: (state, action) => {
@@ -45,21 +42,19 @@ export const spotSlice = createSlice({
     },
   },
   extraReducers: {
-    [getSpotsThunk.pending]: (state) => {
+    [getDataThunk.pending]: (state) => {
       if (!state.isLoading) {
         state.isLoading = true;
       }
     },
-    [getSpotsThunk.fulfilled]: (state, action) => {
+    [getDataThunk.fulfilled]: (state, action) => {
       if (state.isLoading) {
-        const newSpots = action.payload.filter(
-          (spot) => !state.spotsData.find((exSpot) => exSpot.id === spot.id)
-        );
-        state.spotsData = [...newSpots, ...state.spotsData];
+        state.spotsData = action.payload.data;
+        state.selections = action.payload.selections;
         state.isLoading = false;
       }
     },
-    [getSpotsThunk.rejected]: (state, action) => {
+    [getDataThunk.rejected]: (state, action) => {
       console.warn(action.error);
       state.isLoading = false;
     },

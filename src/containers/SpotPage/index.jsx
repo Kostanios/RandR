@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { setCurrentSpot, getSpotByIdThunk } from 'redux/slices/spotsSlice';
+import { setCurrentSpot, getSpotByIdThunk } from 'redux/slices/dataSlice';
 import {
   setGlobalWindowComponent,
   clearGlobalWindowComponent,

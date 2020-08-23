@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import AuthAPI from 'api/auth';
 import {
+  AUTH,
   SET_JWT,
   SET_LOGINED,
-  CONFIRM_JWT,
   CONFIRM_OTP,
   LOG_IN,
   SET_PHONE_NUMBER,
@@ -14,15 +14,26 @@ import {
   COMPONENT_CONFIRM_OTP,
   COMPONENT_LOG_IN,
 } from 'utils/constants/components';
+import cookies from 'utils/cookieStorage';
 
-export const logInThunk = createAsyncThunk(LOG_IN, async (phoneNumber) => {
-  const response = await AuthAPI.logIn(phoneNumber);
-  return response.data;
+export const authThunk = createAsyncThunk(AUTH, async () => {
+  let jwt = cookies.get.jwt();
+  const token = cookies.get.token();
+
+  if (!jwt && token) {
+    const { data } = await AuthAPI.token(token);
+    cookies.set.jwt(data.token);
+    cookies.set.token(token);
+    jwt = data.token;
+  }
+
+  const response = await AuthAPI.auth(jwt);
+  return { ...response.data, jwt };
 });
 
-export const confirmJwtThunk = createAsyncThunk(CONFIRM_JWT, async (jwt) => {
-  const response = await AuthAPI.confirmJwt(jwt);
-  return response.data;
+export const logInThunk = createAsyncThunk(LOG_IN, async (phoneNumber) => {
+  const response = await AuthAPI.requestOtp(phoneNumber);
+  return response;
 });
 
 export const confirmOtpThunk = createAsyncThunk(
@@ -37,8 +48,10 @@ export const confirmOtpThunk = createAsyncThunk(
 export const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    jwt: '',
     phoneNumber: '',
+    jwt: '',
+    profile: {},
+    isAdmin: false,
     isUserNew: false,
     isLoading: false,
     errorMessage: '',
@@ -68,36 +81,18 @@ export const authSlice = createSlice({
     },
     [logInThunk.fulfilled]: (state, action) => {
       if (state.isLoading) {
-        const { message } = action.payload;
-        if (message === messages.OTP_SEND) {
+        console.log(action.payload);
+        if (action.payload.message === messages.SUCCESS) {
           state.isOtpSent = true;
           state.currentComponent = COMPONENT_CONFIRM_OTP;
         } else {
           state.isOtpSent = false;
-          console.log(`/login post response: ${action.payload}`);
+          console.log(`/phone post response: ${action.payload}`);
         }
         state.isLoading = false;
       }
     },
     [logInThunk.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.errorMessage = action.error;
-    },
-    [confirmJwtThunk.pending]: (state) => {
-      if (!state.isLoading) {
-        state.isLoading = true;
-      }
-    },
-    [confirmJwtThunk.fulfilled]: (state, action) => {
-      if (state.isLoading) {
-        const { message, jwt } = action.payload;
-        state.jwt = jwt;
-        state.isUserNew = messages.SINGUP === message;
-        state.isLogined = true;
-        state.isLoading = false;
-      }
-    },
-    [confirmJwtThunk.rejected]: (state, action) => {
       state.isLoading = false;
       state.errorMessage = action.error;
     },
@@ -108,12 +103,37 @@ export const authSlice = createSlice({
     },
     [confirmOtpThunk.fulfilled]: (state, action) => {
       if (state.isLoading) {
-        state.jwt = action.payload.jwt;
+        cookies.set.jwt(action.payload.token);
+        cookies.set.token(action.payload.refreshToken);
+
         state.isLogined = true;
+        state.jwt = action.payload.token;
+        state.phoneNumber = action.payload.user.phoneNumber;
+        state.isAdmin = action.payload.user.admin.length > 0;
+        state.profile = action.payload.user.profile;
         state.isLoading = false;
       }
     },
     [confirmOtpThunk.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.errorMessage = action.error;
+    },
+    [authThunk.pending]: (state) => {
+      if (!state.isLoading) {
+        state.isLoading = true;
+      }
+    },
+    [authThunk.fulfilled]: (state, action) => {
+      if (state.isLoading) {
+        state.isLogined = true;
+        state.jwt = action.payload.jwt;
+        state.phoneNumber = action.payload.phoneNumber;
+        state.isAdmin = action.payload.admin.length > 0;
+        state.profile = action.payload.profile;
+        state.isLoading = false;
+      }
+    },
+    [authThunk.rejected]: (state, action) => {
       state.isLoading = false;
       state.errorMessage = action.error;
     },
