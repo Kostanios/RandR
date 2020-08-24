@@ -1,13 +1,18 @@
+@import 'utils/constants/variables.scss';
 .title {
+  margin: 0px;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 800;
   font-size: 62px;
   line-height: 76px;
   letter-spacing: 0.05em;
-  color: #000000;
+  color: $_black;
+  user-select: none;
+  @media (max-width: 1440px) {
+    font-size: 50px;
+  }
 }
 
 .container {
-  display: flex;
 }

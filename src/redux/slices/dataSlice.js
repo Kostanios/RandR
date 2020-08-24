@@ -50,7 +50,6 @@ export const spotSlice = createSlice({
     [getDataThunk.fulfilled]: (state, action) => {
       if (state.isLoading) {
         state.spotsData = action.payload.data;
-        state.selections = action.payload.selections;
         state.isLoading = false;
       }
     },

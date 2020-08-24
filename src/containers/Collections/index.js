@@ -8,6 +8,22 @@ import styles from './styles.module.scss';
 import 'swiper/swiper.scss';
 
 const Collections = () => {
+  const params = {
+    slidesPerView: 3,
+    spaceBetween: 30,
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      1024: {
+        slidesPerView: 4,
+        spaceBetween: 30,
+      },
+    },
+  };
+
   const cardsCollection = collections.map((item) => {
     const { selection, image } = item;
     return (
@@ -17,9 +33,7 @@ const Collections = () => {
   return (
     <>
       <h2 className={styles.title}>Подборки</h2>
-      <div className={styles.container}>
-        <Swiper>{cardsCollection}</Swiper>
-      </div>
+      <Swiper {...params}>{cardsCollection}</Swiper>
     </>
   );
 };

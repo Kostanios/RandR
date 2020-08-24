@@ -1,6 +1,14 @@
-.container {
-  height: 220px;
+@import 'utils/constants/variables';
+div .cardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
+  height: 220px;
+  cursor: pointer;
+  @media (max-width: 1440px) {
+    height: 180px;
+  }
 }
 
 .title {
@@ -11,5 +19,9 @@
   line-height: 49px;
   text-align: center;
   letter-spacing: 0.1em;
-  color: #ffffff;
+  text-transform: capitalize;
+  color: $_white;
+  @media (max-width: 1440px) {
+    font-size: 35px;
+  }
 }

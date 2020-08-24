@@ -1,10 +1,10 @@
 import React from 'react';
 
-import styles from 'components/CollectionCard/styles.module.scss';
+import styles from './styles.module.scss';
 
 const CollectionCard = ({ selection, image }) => (
   <div
-    className={styles.container}
+    className={`swiper-slide ${styles.cardContainer}`}
     style={{
       background: `linear-gradient(180deg, #000000 0%, rgba(255, 255, 255, 0) 100%), url(${image})`,
     }}

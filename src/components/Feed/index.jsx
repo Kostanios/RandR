@@ -9,25 +9,23 @@ const getSliderParams = (vertical = false) => {
     grabCursor: true,
     navigation: {
       nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev'
-    }
-  }
+      prevEl: '.swiper-button-prev',
+    },
+  };
   if (vertical) {
     params.direction = 'vertical';
   }
   return params;
-}
+};
 
 const Feed = ({ vertical, children, title }) => {
   const params = getSliderParams(vertical);
   return (
     <div className={styles.feedWrapper}>
       {title && <div className={styles.feedHeading}>{title}</div>}
-      <Swiper {...params}>
-        {children}
-      </Swiper>
+      <Swiper {...params}>{children}</Swiper>
     </div>
   );
 };
 
-export default Feed
+export default Feed;
