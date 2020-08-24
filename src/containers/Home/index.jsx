@@ -7,6 +7,8 @@ import { getDataThunk } from 'redux/slices/dataSlice';
 import formSpotsCards from 'utils/formSpotsCards/index';
 import styles from './styles.module.scss';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import { CacheSwitch } from 'react-router-cache-route/index';
+import Collections from '../Collections';
 
 export default () => {
   const dispatch = useDispatch();
@@ -19,6 +21,7 @@ export default () => {
   const formedCards = formSpotsCards(routeMatch.url, spotsData);
   return (
     <div className={styles.homepage}>
+      <Collections />
       <div className={styles.searchBarWrapper}>
         <SearchBar />
       </div>
