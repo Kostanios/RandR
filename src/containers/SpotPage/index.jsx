@@ -16,8 +16,8 @@ import styles from './styles.module.scss';
 
 const SpotPage = () => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-  const currentId = useSelector((state) => state.spots.id);
-  const currentSpot = useSelector((state) => state.spots.currentSpot);
+  const currentId = useSelector((state) => state.data.id);
+  const currentSpot = useSelector((state) => state.data.currentSpot);
   useEffect(() => {
     if (typeof currentId === 'number') {
       getSpotByIdThunk(currentId);
@@ -61,7 +61,7 @@ const SpotPage = () => {
         >
           <div className={styles.contentBlockHeading}>О ресторане</div>
           <div className={styles.contentBlockButton}>
-            <ActionButton fullWidth={true} buttonText={'Забронировать стол'} />
+            <ActionButton fullWidth buttonText="Забронировать стол" />
           </div>
         </div>
         <div className={styles.contentBlock}>
@@ -82,7 +82,7 @@ const SpotPage = () => {
             <div className={styles.contentBlockText}>{currentSpot.address}</div>
           </div>
           <div className={styles.contentBlockButton}>
-            <ActionButton fullWidth={true} buttonText={'Показать на карте'} />
+            <ActionButton fullWidth buttonText="Показать на карте" />
           </div>
         </div>
         <div className={styles.contentBlock}>
@@ -157,7 +157,7 @@ export const SpotPageTrigger = () => {
       dispatch(clearGlobalWindowComponent());
     };
   });
-  return <div></div>;
+  return <div />;
 };
 
 export default SpotPage;

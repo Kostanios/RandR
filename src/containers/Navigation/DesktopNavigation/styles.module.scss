@@ -1,4 +1,5 @@
 @import 'utils/constants/variables.scss';
+@import 'utils/fonts/fonts.scss';
 .navigation {
   z-index: 5;
   display: flex;
@@ -41,7 +42,7 @@
 }
 .textLogo,
 .button {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'San Francisco Pro';
   font-weight: 900;
   font-size: 40px;
   line-height: 48px;

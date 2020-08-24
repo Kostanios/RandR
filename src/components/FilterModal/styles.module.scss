@@ -1,0 +1,108 @@
+@import 'utils/constants/variables.scss';
+
+.container {
+  position: absolute;
+  left: 600px;
+  font-size: 28px;
+  width: 450px;
+  padding: 30px 40px;
+  z-index: 10;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: $_white;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 30px;
+  width: 30px;
+  background-color: $_white;
+  border: 4px solid #e9e9ea;
+  box-sizing: border-box;
+  border-radius: 10px;
+  &:after {
+    content: '';
+    position: absolute;
+    display: none;
+  }
+}
+
+.filterItem {
+  margin-bottom: 22px;
+  padding-left: 50px;
+  cursor: pointer;
+  position: relative;
+  font-family: 'San Francisco Pro';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1em;
+  line-height: 33px;
+  text-transform: capitalize;
+  letter-spacing: 0.1em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    &:checked ~ .checkmark {
+      background-color: $_black;
+      border: 0;
+    }
+  }
+}
+.filterItem .checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 13px;
+  height: 13px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.button {
+  font-family: 'San Francisco Pro';
+  border-radius: 20px;
+  background-color: $background-color-main;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1em;
+  letter-spacing: 0.15em;
+  line-height: 33px;
+  color: $_white;
+  box-shadow: 0px 4px 10px rgba(142, 249, 171, 0.3);
+  outline: 0;
+  border: 0;
+}
+
+@media (max-width: 1440px) {
+  .container {
+    padding: 20px 30px;
+    width: 320px;
+    font-size: 20px;
+  }
+
+  .filterItem {
+    margin-bottom: 10px;
+  }
+}
