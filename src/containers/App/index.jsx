@@ -16,10 +16,12 @@ import {
 } from 'utils/constants/routeNames';
 import styles from './styles.module.scss';
 import GlobalWindow from 'containers/GlobalWindow';
+import socket from 'api/socket';
 
 // TODO: data fetching faster, then user location.
 
 function App() {
+  socket();
   const dispatch = useDispatch();
   function getGeolocation() {
     function successCallback(positionObj) {

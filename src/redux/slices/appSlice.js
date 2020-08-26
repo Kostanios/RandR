@@ -9,6 +9,8 @@ import {
   SET_IS_CONNECTED,
   SET_BOTTOM_SHEET,
   SET_NAVIGATION_VISIBILITY,
+  SET_SOCKET_STATE,
+  SET_APP_ID,
 } from 'utils/constants/reducers';
 import md from 'utils/mobileDetector';
 
@@ -19,8 +21,10 @@ export const pinThunk = createAsyncThunk(PIN, async () => {
 export const appSlice = createSlice({
   name: 'app',
   initialState: {
+    appId: undefined,
     isLoading: false,
     isConnected: false,
+    isSocketConnected: false,
     isLoaded: false,
     isMobile: md.mobile() !== null,
     isNavigationVisible: true,
@@ -36,6 +40,10 @@ export const appSlice = createSlice({
     },
   },
   reducers: {
+    [SET_APP_ID]: (state, action) => {
+      state.appId = action.payload;
+      state.isSocketConnected = true;
+    },
     [SET_IS_CONNECTED]: (state, action) => {
       state.isConnected = action.payload;
     },
@@ -87,6 +95,7 @@ export const {
   setUserLocation,
   setBottomSheet,
   setNavigationVisibility,
+  setAppId,
 } = appSlice.actions;
 
 export default appSlice.reducer;

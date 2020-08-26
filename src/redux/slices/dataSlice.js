@@ -4,6 +4,7 @@ import {
   SET_CURRENT_SPOT,
   GET_DATA_THUNK,
   GET_SPOT_BY_ID_THUNK,
+  UPDATE_DATA,
 } from 'utils/constants/reducers';
 
 export const getDataThunk = createAsyncThunk(GET_DATA_THUNK, async () => {
@@ -40,6 +41,16 @@ export const spotSlice = createSlice({
         state.currentSpot = undefined;
       }
     },
+    [UPDATE_DATA]: (state, action) => {
+      const index = state.spotsData.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (index !== -1)
+        state.spotsData[index] = {
+          ...state.spotsData[index],
+          ...action.payload,
+        };
+    },
   },
   extraReducers: {
     [getDataThunk.pending]: (state) => {
@@ -74,6 +85,6 @@ export const spotSlice = createSlice({
   },
 });
 
-export const { setCurrentSpot } = spotSlice.actions;
+export const { setCurrentSpot, updateData } = spotSlice.actions;
 
 export default spotSlice.reducer;

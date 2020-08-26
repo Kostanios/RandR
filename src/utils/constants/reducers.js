@@ -6,6 +6,7 @@ export const SET_USER_LOCATION = 'setUserLocation';
 export const SET_IS_CONNECTED = 'setIsConnected';
 export const SET_BOTTOM_SHEET = 'setBottomSheet';
 export const SET_NAVIGATION_VISIBILITY = 'setNavigationVisibility';
+export const SET_APP_ID = 'setAppId';
 export const PIN = 'pin';
 
 // user
@@ -33,3 +34,4 @@ export const SET_CURRENT_SPOT = 'setCurrentSpot';
 export const GET_DATA_THUNK = 'getDataThunk';
 export const GET_SPOT_BY_ID_THUNK = 'getSpotByIdThunk';
 export const SET_PENDING_CARDS = 'setPendingCards';
+export const UPDATE_DATA = 'updateData';
