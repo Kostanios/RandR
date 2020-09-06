@@ -9,6 +9,7 @@ import {
 
 export const getDataThunk = createAsyncThunk(GET_DATA_THUNK, async () => {
   const { data } = await DataAPI.getData();
+  console.log(data);
   return data;
 });
 
@@ -28,6 +29,7 @@ export const spotSlice = createSlice({
     currentSpot: undefined,
     isLoading: false,
     spotsData: [],
+    filters: {},
     selections: {},
   },
   reducers: {
@@ -45,11 +47,12 @@ export const spotSlice = createSlice({
       const index = state.spotsData.findIndex(
         (item) => item.id === action.payload.id
       );
-      if (index !== -1)
-        state.spotsData[index] = {
+      if (index !== -1) {
+        state.spotsData = {
           ...state.spotsData[index],
           ...action.payload,
         };
+      }
     },
   },
   extraReducers: {
@@ -61,6 +64,8 @@ export const spotSlice = createSlice({
     [getDataThunk.fulfilled]: (state, action) => {
       if (state.isLoading) {
         state.spotsData = action.payload.data;
+        state.filters = action.payload.filters;
+        state.selections = action.payload.selections;
         state.isLoading = false;
       }
     },

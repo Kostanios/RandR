@@ -5,9 +5,9 @@ import FeedTape from 'components/Feed';
 import { SpotPageTrigger } from 'containers/SpotPage';
 import { getDataThunk } from 'redux/slices/dataSlice';
 import formSpotsCards from 'utils/formSpotsCards/index';
-import styles from './styles.module.scss';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import { CacheSwitch } from 'react-router-cache-route/index';
+import styles from './styles.module.scss';
 import Collections from '../Collections';
 
 export default () => {
@@ -25,7 +25,7 @@ export default () => {
       <div className={styles.searchBarWrapper}>
         <SearchBar />
       </div>
-      <FeedTape title={'Все рестораны'}>{formedCards}</FeedTape>
+      <FeedTape title="Все рестораны">{formedCards}</FeedTape>
       <Switch>
         <Route path={`${routeMatch.path}:spotId`} component={SpotPageTrigger} />
       </Switch>

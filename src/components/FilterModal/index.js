@@ -1,31 +1,27 @@
-import React, { useEffect, useRef } from 'react';
-import filters from '../../mocks/filters';
+import React, { useRef, useState } from 'react';
 import useModal from '../../utils/hooks/useModal';
 
 import styles from './styles.module.scss';
 
-const FilterModal = ({ callback, parentRef }) => {
+const FilterModal = ({ callback, parentRef, filters }) => {
   const modal = useRef(null);
-
   const { isVisible } = useModal(modal, parentRef);
-
-  const filterItems = filters.map((item) => {
-    const { filter } = item;
-    return (
-      <label className={styles.filterItem} key={filter}>
-        <input type="checkbox" name={filter} />
-        <span className={styles.checkmark} />
-        {filter}
-      </label>
-    );
-  });
 
   if (isVisible) {
     return (
       <div ref={modal} className={styles.container}>
         <form className={styles.formContainer}>
-          {filterItems}
-          <button className={styles.button} type="button">
+          {filters.cuisines.map((item) => {
+            const { name } = item;
+            return (
+              <label className={styles.filterItem} key={name}>
+                <input type="checkbox" name={name} />
+                <span className={styles.checkmark} />
+                {name}
+              </label>
+            );
+          })}
+          <button className={styles.button} type="button" onClick={callback}>
             Подтвердить
           </button>
         </form>

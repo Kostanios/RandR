@@ -14,9 +14,9 @@ import {
   FAVORITE_ROUTE,
   AUTH_ROUTE,
 } from 'utils/constants/routeNames';
-import styles from './styles.module.scss';
 import GlobalWindow from 'containers/GlobalWindow';
 import socket from 'api/socket';
+import styles from './styles.module.scss';
 
 // TODO: data fetching faster, then user location.
 

@@ -3,7 +3,7 @@ import {
   SET_GLOBAL_WINDOW_COMPONENT,
   UPDATE_GLOBAL_WINDOW_COMPONENT,
   CLEAR_GLOBAL_WINDOW_COMPONENT,
-  SET_GLOBAL_WINDOW_PARAMS
+  SET_GLOBAL_WINDOW_PARAMS,
 } from 'utils/constants/reducers';
 
 export const globalWindowSlice = createSlice({
@@ -11,7 +11,7 @@ export const globalWindowSlice = createSlice({
   initialState: {
     component: {},
     navigateBeforeClose: null,
-    modalView: false
+    modalView: false,
   },
   reducers: {
     [SET_GLOBAL_WINDOW_COMPONENT]: (state, action) => {
@@ -20,14 +20,14 @@ export const globalWindowSlice = createSlice({
     [UPDATE_GLOBAL_WINDOW_COMPONENT]: (state, action) => {
       state.component = Object.assign(state.component, action.payload);
     },
-    [CLEAR_GLOBAL_WINDOW_COMPONENT]: state => {
+    [CLEAR_GLOBAL_WINDOW_COMPONENT]: (state) => {
       state.component = {};
       state.navigateBeforeClose = null;
     },
     [SET_GLOBAL_WINDOW_PARAMS]: (state, action) => {
       state.navigateBeforeClose = action.payload.navigateBeforeClose;
       state.modalView = action.payload.modalView;
-    }
+    },
   },
 });
 
@@ -35,7 +35,7 @@ export const {
   setGlobalWindowComponent,
   updateGlobalWindowComponent,
   clearGlobalWindowComponent,
-  setGlobalWindowParams
+  setGlobalWindowParams,
 } = globalWindowSlice.actions;
 
 export default globalWindowSlice.reducer;

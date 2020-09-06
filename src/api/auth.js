@@ -6,7 +6,7 @@ class AuthAPI {
     const { data } = await axios.get(
       `${config.baseUrl}${config.version}${config.endpoints.auth.login}`,
       {
-        headers: { ...config.options.headers, Authorization: 'Bearer ' + jwt },
+        headers: { ...config.options.headers, Authorization: `Bearer ${jwt}` },
       }
     );
     return data;
