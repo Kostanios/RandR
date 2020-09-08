@@ -1,0 +1,20 @@
+@import 'utils/constants/variables.scss';
+.showMoreButton {
+  height: 30px;
+  width: 100%;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  color: white;
+  background: #2dbb54;
+  letter-spacing: 3px;
+  border-radius: 10px;
+  border: 0px;
+  &:hover {
+    border: 2px solid #20853b;
+    cursor: pointer;
+  }
+  &:focus {
+    border: 2px solid black;
+    outline: none;
+  }
+}

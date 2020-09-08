@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SearchBar from 'containers/SearchBar';
 import FeedTape from 'components/Feed';
+import ShowMoreButton from 'components/ShowMoreButton';
 import { SpotPageTrigger } from 'containers/SpotPage';
 import { getDataThunk } from 'redux/slices/dataSlice';
 import formSpotsCards from 'utils/formSpotsCards/index';
@@ -29,6 +30,7 @@ export default () => {
       <Switch>
         <Route path={`${routeMatch.path}:spotId`} component={SpotPageTrigger} />
       </Switch>
+      <ShowMoreButton />
     </div>
   );
 };
