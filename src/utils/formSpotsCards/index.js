@@ -7,7 +7,8 @@ import styles from './styles.module.scss';
 function formWithIconsItems(spot) {
   const items = [];
   if (spot.rating) {
-    items.push({ icon: 'STAR_ICON', value: `${spot.rating}` });
+    let rating = calculateCurrentRating(spot.rating);
+    items.push({ icon: 'STAR_ICON', value: `${rating}` });
   }
   if (spot.bill) {
     items.push({ icon: 'PURSE_ICON', value: `${spot.bill} BYN` });
@@ -26,10 +27,21 @@ function formWithoutIconsItems(spot) {
   return items;
 }
 
+function calculateCurrentRating(ratingObj) {
+  let currentRating = 0;
+  let categoryNumber = 0;
+  for (let category in ratingObj) {
+    currentRating += ratingObj[category];
+    categoryNumber++;
+  }
+  return currentRating / categoryNumber.toFixed(1);
+}
 export default function (baseUrl, spotsData) {
+  console.log(spotsData);
   let formedCards = [];
   if (spotsData.length) {
     formedCards = spotsData.map((spot) => {
+      console.log(spot.geo.address);
       const photo =
         spot.photos && spot.photos.length
           ? `${config.baseUrl}${spot.photos[0].url}`
@@ -37,7 +49,8 @@ export default function (baseUrl, spotsData) {
       return (
         <div className={styles.swiperItem} key={spot.title + spot.id}>
           <EstCard
-            title={spot.title}
+            title={spot.name}
+            address={spot.geo.address}
             linkTo={`${baseUrl}${spot.id}`}
             photo={photo}
             withIconsItems={formWithIconsItems(spot)}
