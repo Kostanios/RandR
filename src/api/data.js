@@ -3,7 +3,9 @@ import config from './config';
 
 class SpotsAPI {
   async pin() {
-    await axios.get(`${config.baseUrl}${config.endpoints.pin}`);
+    await axios.get(`${config.baseUrl}${config.endpoints.pin}`, {
+      headers: config.options.headers,
+    });
   }
 
   async getData() {
@@ -12,6 +14,15 @@ class SpotsAPI {
       {
         headers: config.options.headers,
       }
+    );
+    return data;
+  }
+
+  async getTimetable(spotId, date) {
+    const { data } = await axios.post(
+      `${config.baseUrl}${config.version}${config.endpoints.spot.timetable}`,
+      { spotId, date },
+      { headers: config.options.headers }
     );
     return data;
   }
