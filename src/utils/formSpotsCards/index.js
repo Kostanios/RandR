@@ -41,11 +41,8 @@ export default function (baseUrl, spotsData) {
   let formedCards = [];
   if (spotsData.length) {
     formedCards = spotsData.map((spot) => {
-      console.log(spot.geo.address);
       const photo =
-        spot.photos && spot.photos.length
-          ? `${config.baseUrl}${spot.photos[0].url}`
-          : NoPhoto;
+        spot.images && spot.images.length ? spot.images[0] : NoPhoto;
       return (
         <div className={styles.swiperItem} key={spot.title + spot.id}>
           <EstCard
