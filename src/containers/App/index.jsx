@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
-import { setUserLocation, pinThunk } from 'redux/slices/appSlice';
+import { setUserLocation } from 'redux/slices/appSlice';
 import { authThunk } from 'redux/slices/authSlice';
 import Map from 'containers/Map';
 import Home from 'containers/Home';
@@ -19,9 +19,7 @@ import GlobalWindow from 'containers/GlobalWindow';
 import socket from 'api/socket';
 import styles from './styles.module.scss';
 
-// TODO: data fetching faster, then user location.
-
-function App() {
+const App = () => {
   socket();
   const dispatch = useDispatch();
   function getGeolocation() {
@@ -48,13 +46,9 @@ function App() {
   }
   useEffect(() => {
     getGeolocation();
-    dispatch(pinThunk());
     dispatch(authThunk());
-  });
-  const isMobile = useSelector((state) => state.app.isMobile);
-  const isNavigationVisible = useSelector(
-    (state) => state.app.isNavigationVisible
-  );
+  }, []);
+  const { isMobile, isNavigationVisible } = useSelector((state) => state.app);
   return (
     <Router>
       <div
@@ -74,6 +68,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 export default App;

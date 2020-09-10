@@ -10,8 +10,7 @@ export const SET_APP_ID = 'setAppId';
 export const PIN = 'pin';
 
 // user
-export const SET_JWT = 'setJwt';
-export const SET_PHONE_NUMBER = 'setPhoneNumber';
+export const SET_PHONE = 'setPhone';
 export const LOG_IN = 'logIn';
 export const CONFIRM_OTP = 'confirmOtp';
 export const SET_AUTH_COMPONENT = 'setAuthComponent';

@@ -2,21 +2,11 @@ import axios from 'axios';
 import config from './config';
 
 class AuthAPI {
-  async auth(jwt) {
+  async auth() {
     const { data } = await axios.get(
       `${config.baseUrl}${config.version}${config.endpoints.auth.login}`,
       {
-        headers: { ...config.options.headers, Authorization: `Bearer ${jwt}` },
-      }
-    );
-    return data;
-  }
-
-  async token(token) {
-    const { data } = await axios.post(
-      `${config.baseUrl}${config.version}${config.endpoints.auth.token}`,
-      {
-        headers: { ...config.options.headers, Token: token },
+        headers: config.options.headers,
       }
     );
     return data;

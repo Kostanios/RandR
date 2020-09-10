@@ -2,11 +2,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import AuthAPI from 'api/auth';
 import {
   AUTH,
-  SET_JWT,
   SET_LOGINED,
   CONFIRM_OTP,
   LOG_IN,
-  SET_PHONE_NUMBER,
+  SET_PHONE,
   SET_AUTH_COMPONENT,
 } from 'utils/constants/reducers';
 import { messages } from 'utils/constants/response';
@@ -14,33 +13,22 @@ import {
   COMPONENT_CONFIRM_OTP,
   COMPONENT_LOG_IN,
 } from 'utils/constants/components';
-import cookies from 'utils/cookieStorage';
 
 export const authThunk = createAsyncThunk(AUTH, async () => {
-  let jwt = cookies.get.jwt();
-  const token = cookies.get.token();
-
-  if (!jwt && token) {
-    const { data } = await AuthAPI.token(token);
-    cookies.set.jwt(data.token);
-    cookies.set.token(token);
-    jwt = data.token;
-  }
-
-  const response = await AuthAPI.auth(jwt);
-  return { ...response.data, jwt };
+  const { data } = await AuthAPI.auth();
+  return data;
 });
 
-export const logInThunk = createAsyncThunk(LOG_IN, async (phoneNumber) => {
-  const response = await AuthAPI.requestOtp(phoneNumber);
+export const logInThunk = createAsyncThunk(LOG_IN, async (phone) => {
+  const response = await AuthAPI.requestOtp(phone);
   return response;
 });
 
 export const confirmOtpThunk = createAsyncThunk(
   CONFIRM_OTP,
   async (otp, { getState }) => {
-    const { phoneNumber } = getState().auth;
-    const response = await AuthAPI.confirmOtp({ phoneNumber, otp });
+    const { phone } = getState().auth;
+    const response = await AuthAPI.confirmOtp({ phone, otp });
     return response.data;
   }
 );
@@ -48,11 +36,10 @@ export const confirmOtpThunk = createAsyncThunk(
 export const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    phoneNumber: '',
-    jwt: '',
+    phone: '',
     profile: {},
+    favorites: [],
     isAdmin: false,
-    isUserNew: false,
     isLoading: false,
     errorMessage: '',
     isOtpSent: false,
@@ -60,11 +47,8 @@ export const authSlice = createSlice({
     currentComponent: COMPONENT_LOG_IN,
   },
   reducers: {
-    [SET_JWT]: (state, action) => {
-      state.jwt = action.payload;
-    },
-    [SET_PHONE_NUMBER]: (state, action) => {
-      state.phoneNumber = action.payload;
+    [SET_PHONE]: (state, action) => {
+      state.phone = action.payload;
     },
     [SET_LOGINED]: (state, action) => {
       state.isLogined = action.payload;
@@ -103,12 +87,8 @@ export const authSlice = createSlice({
     },
     [confirmOtpThunk.fulfilled]: (state, action) => {
       if (state.isLoading) {
-        cookies.set.jwt(action.payload.token);
-        cookies.set.token(action.payload.refreshToken);
-
         state.isLogined = true;
-        state.jwt = action.payload.token;
-        state.phoneNumber = action.payload.user.phoneNumber;
+        state.phone = action.payload.user.phone;
         state.isAdmin = action.payload.user.admin.length > 0;
         state.profile = action.payload.user.profile;
         state.isLoading = false;
@@ -126,10 +106,11 @@ export const authSlice = createSlice({
     [authThunk.fulfilled]: (state, action) => {
       if (state.isLoading) {
         state.isLogined = true;
-        state.jwt = action.payload.jwt;
-        state.phoneNumber = action.payload.phoneNumber;
+        state.phone = action.payload.phone;
         state.isAdmin = action.payload.admin.length > 0;
         state.profile = action.payload.profile;
+        state.favorites = action.payload.favorites;
+        state.orders = action.payload.orders;
         state.isLoading = false;
       }
     },
@@ -140,11 +121,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const {
-  setAuthComponent,
-  setJwt,
-  setIsLogined,
-  setPhoneNumber,
-} = authSlice.actions;
+export const { setAuthComponent, setIsLogined, setPhone } = authSlice.actions;
 
 export default authSlice.reducer;
