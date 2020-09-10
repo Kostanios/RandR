@@ -1,0 +1,30 @@
+.footerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  border-top: 1px solid #e9e9ea;
+}
+.SupportAndLicenceContainer {
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.LinkIconsContainer {
+  width: 200px;
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.licence {
+  color: #d7d7d7;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  align-self: center;
+}
+.iconButton {
+  border-radius: 30px;
+  &:hover {
+    cursor: pointer;
+  }
+}
