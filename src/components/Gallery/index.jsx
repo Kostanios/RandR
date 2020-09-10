@@ -1,9 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styles from './styles.module.scss';
-import { useState } from 'react';
 
 const Gallery = ({ children }) => {
-  return <div className={styles.Gallery}>{children}</div>;
+  const { galeryComponentLimit } = useSelector((state) => state.globalWindow);
+  return (
+    <div className={styles.Gallery}>
+      {children.slice(0, galeryComponentLimit)}
+    </div>
+  );
 };
 
 export default Gallery;

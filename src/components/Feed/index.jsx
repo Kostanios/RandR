@@ -19,7 +19,6 @@ const getSliderParams = (vertical = false) => {
 };
 
 const Feed = ({ vertical, children, title }) => {
-  console.log('children-' + children);
   const params = getSliderParams(vertical);
   return (
     <div className={styles.feedWrapper}>

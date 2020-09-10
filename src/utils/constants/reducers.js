@@ -21,6 +21,7 @@ export const SET_GLOBAL_WINDOW_COMPONENT = 'setGlobalWindowComponent';
 export const UPDATE_GLOBAL_WINDOW_COMPONENT = 'updateGlobalWindowComponent';
 export const CLEAR_GLOBAL_WINDOW_COMPONENT = 'clearGlobalWindowComponent';
 export const SET_GLOBAL_WINDOW_PARAMS = 'setGlobalWindowParams';
+export const SET_GALERY_COMPONENT_LIMIT = 'setGaleryComponentLimit';
 
 // bottom sheet
 export const SET_BOTTOM_SHEET_COMPONENT = 'setBottomSheetComponent';
