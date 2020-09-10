@@ -40,6 +40,7 @@
     background-color: $background-color-gray-light;
   }
   .headerImage {
+    object-fit: cover;
     width: 100%;
     height: 100%;
     max-width: 100%;
