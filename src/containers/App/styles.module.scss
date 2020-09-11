@@ -5,7 +5,7 @@
   width: 100%;
   overflow: hidden;
   &--mobile {
-    flex-direction: column-reverse;
+    flex-direction: column;
     justify-content: space-between;
     .wrapperInner {
       height: calc(100vh - #{$mobile-navigation-height});

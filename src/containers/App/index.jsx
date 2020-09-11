@@ -56,7 +56,6 @@ const App = () => {
           isMobile ? styles['wrapper--mobile'] : ''
         }`}
       >
-        {isNavigationVisible && <Navigation renderMobile={isMobile} />}
         <CacheSwitch className={styles.wrapperInner}>
           <Route path={`/${FAVORITE_ROUTE}`} component={Favorite} />
           <CacheRoute path={`/${MAP_ROUTE}`} when="always" component={Map} />
@@ -65,6 +64,7 @@ const App = () => {
         </CacheSwitch>
         <GlobalWindow />
         <Footer />
+        {isNavigationVisible && <Navigation renderMobile={isMobile} />}
       </div>
     </Router>
   );
