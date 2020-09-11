@@ -2,25 +2,44 @@ export default {
   baseUrl: 'https://randr-server.herokuapp.com',
   // TODO: take out token value to .env
   socketUrl:
-    'https://randr-socket.herokuapp.com?token=SOME_SECRET_SERVER_TOKEN',
+    'https://randr-socket.herokuapp.com?token=qnyolcAwbWfoo69k5iTpsjNY88WZPHIa',
   version: '/v1',
   endpoints: {
-    pin: '/',
     auth: {
       login: '/auth',
       requestOtp: '/auth/phone-request',
       confirmOtp: '/auth/phone-confirm',
-      token: '/auth/token',
+    },
+    profile: {
+      edit: '/profile/edit',
+      addFavorite: '/profile/add-favorite',
+      removeFavorite: '/profile/remove-favorite',
+      email: '/profile/email',
     },
     spot: {
       data: '/',
-      order: '/spot/order',
+      timetable: '/timetable',
+      comment: '/comment',
+      requestOrder: '/request-order',
+      cancelOrder: '/cancel-order',
+    },
+    admin: {
+      panel: '/admin',
+      addAdmin: '/admin/add-admin',
+      removeAdmin: '/admin/remove-admin',
+      blockUser: '/admin/block-user',
+      unblockUser: '/admin/unblock-user',
+      confirmOrder: '/admin/confirm-order',
+      rejectOrder: '/admin/reject-order',
+      updateOrder: '/admin/update-order',
+      openTable: '/admin/open-table',
+      closeTable: '/admin/close-table',
     },
   },
   options: {
     headers: {
       'Content-Type': 'application/json',
-      'X-Api-Key': '63ee1bee-42f8-483b-b907-fc82c86e3157',
+      'x-api-key': 'dc8xhds0ZavQRg6EuFJ3bvpPXJ40I0xl',
     },
   },
 };

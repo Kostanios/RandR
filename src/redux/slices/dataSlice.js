@@ -9,7 +9,6 @@ import {
 
 export const getDataThunk = createAsyncThunk(GET_DATA_THUNK, async () => {
   const { data } = await DataAPI.getData();
-  console.log(data);
   return data;
 });
 
@@ -28,9 +27,9 @@ export const spotSlice = createSlice({
     id: undefined,
     currentSpot: undefined,
     isLoading: false,
+    selections: [],
     spotsData: [],
     filters: {},
-    selections: {},
   },
   reducers: {
     [SET_CURRENT_SPOT]: (state, action) => {
@@ -48,7 +47,7 @@ export const spotSlice = createSlice({
         (item) => item.id === action.payload.id
       );
       if (index !== -1) {
-        state.spotsData = {
+        state.spotsData[index] = {
           ...state.spotsData[index],
           ...action.payload,
         };

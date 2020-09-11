@@ -1,7 +1,7 @@
 import React from 'react';
-import Swiper from 'react-id-swiper';
+//import Swiper from 'react-id-swiper';
 import styles from './styles.module.scss';
-
+import Gallery from 'components/Gallery';
 const getSliderParams = (vertical = false) => {
   const params = {
     slidesPerView: 'auto',
@@ -23,7 +23,7 @@ const Feed = ({ vertical, children, title }) => {
   return (
     <div className={styles.feedWrapper}>
       {title && <div className={styles.feedHeading}>{title}</div>}
-      <Swiper {...params}>{children}</Swiper>
+      <Gallery children={children} />
     </div>
   );
 };

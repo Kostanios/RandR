@@ -2,11 +2,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import AuthAPI from 'api/auth';
 import {
   AUTH,
-  SET_JWT,
   SET_LOGINED,
+  REQUEST_OTP,
   CONFIRM_OTP,
-  LOG_IN,
-  SET_PHONE_NUMBER,
+  SET_PHONE,
   SET_AUTH_COMPONENT,
 } from 'utils/constants/reducers';
 import { messages } from 'utils/constants/response';
@@ -14,57 +13,45 @@ import {
   COMPONENT_CONFIRM_OTP,
   COMPONENT_LOG_IN,
 } from 'utils/constants/components';
-import cookies from 'utils/cookieStorage';
 
 export const authThunk = createAsyncThunk(AUTH, async () => {
-  let jwt = cookies.get.jwt();
-  const token = cookies.get.token();
-
-  if (!jwt && token) {
-    const { data } = await AuthAPI.token(token);
-    cookies.set.jwt(data.token);
-    cookies.set.token(token);
-    jwt = data.token;
-  }
-
-  const response = await AuthAPI.auth(jwt);
-  return { ...response.data, jwt };
+  const response = await AuthAPI.auth();
+  return response;
 });
 
-export const logInThunk = createAsyncThunk(LOG_IN, async (phoneNumber) => {
-  const response = await AuthAPI.requestOtp(phoneNumber);
+export const requestOtpThunk = createAsyncThunk(REQUEST_OTP, async (phone) => {
+  const response = await AuthAPI.requestOtp(phone);
   return response;
 });
 
 export const confirmOtpThunk = createAsyncThunk(
   CONFIRM_OTP,
   async (otp, { getState }) => {
-    const { phoneNumber } = getState().auth;
-    const response = await AuthAPI.confirmOtp({ phoneNumber, otp });
-    return response.data;
+    const { phone } = getState().auth;
+    const response = await AuthAPI.confirmOtp({ phone, otp });
+    return response;
   }
 );
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    phoneNumber: '',
-    jwt: '',
+    phone: '',
     profile: {},
+    favorites: [],
     isAdmin: false,
-    isUserNew: false,
     isLoading: false,
     errorMessage: '',
-    isOtpSent: false,
+    otp: {
+      isSent: false,
+      attempts: 0,
+    },
     isLogined: false,
     currentComponent: COMPONENT_LOG_IN,
   },
   reducers: {
-    [SET_JWT]: (state, action) => {
-      state.jwt = action.payload;
-    },
-    [SET_PHONE_NUMBER]: (state, action) => {
-      state.phoneNumber = action.payload;
+    [SET_PHONE]: (state, action) => {
+      state.phone = action.payload;
     },
     [SET_LOGINED]: (state, action) => {
       state.isLogined = action.payload;
@@ -74,25 +61,23 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: {
-    [logInThunk.pending]: (state) => {
+    [requestOtpThunk.pending]: (state) => {
       if (!state.isLoading) {
         state.isLoading = true;
       }
     },
-    [logInThunk.fulfilled]: (state, action) => {
+    [requestOtpThunk.fulfilled]: (state, action) => {
       if (state.isLoading) {
-        console.log(action.payload);
         if (action.payload.message === messages.SUCCESS) {
-          state.isOtpSent = true;
-          state.currentComponent = COMPONENT_CONFIRM_OTP;
-        } else {
-          state.isOtpSent = false;
-          console.log(`/phone post response: ${action.payload}`);
+          state.otp = {
+            isSent: true,
+            attempts: 3,
+          };
         }
         state.isLoading = false;
       }
     },
-    [logInThunk.rejected]: (state, action) => {
+    [requestOtpThunk.rejected]: (state, action) => {
       state.isLoading = false;
       state.errorMessage = action.error;
     },
@@ -103,19 +88,23 @@ export const authSlice = createSlice({
     },
     [confirmOtpThunk.fulfilled]: (state, action) => {
       if (state.isLoading) {
-        cookies.set.jwt(action.payload.token);
-        cookies.set.token(action.payload.refreshToken);
-
+        state.otp = {
+          isSent: false,
+          attempts: 0,
+        };
         state.isLogined = true;
-        state.jwt = action.payload.token;
-        state.phoneNumber = action.payload.user.phoneNumber;
+        state.phone = action.payload.user.phone;
         state.isAdmin = action.payload.user.admin.length > 0;
         state.profile = action.payload.user.profile;
+        state.favorites = action.payload.favorites;
+        state.orders = action.payload.orders;
         state.isLoading = false;
       }
     },
     [confirmOtpThunk.rejected]: (state, action) => {
       state.isLoading = false;
+      state.otp.attempts--;
+      if (state.otp.attempts === 0) state.otp.isSent = false;
       state.errorMessage = action.error;
     },
     [authThunk.pending]: (state) => {
@@ -126,10 +115,11 @@ export const authSlice = createSlice({
     [authThunk.fulfilled]: (state, action) => {
       if (state.isLoading) {
         state.isLogined = true;
-        state.jwt = action.payload.jwt;
-        state.phoneNumber = action.payload.phoneNumber;
+        state.phone = action.payload.phone;
         state.isAdmin = action.payload.admin.length > 0;
         state.profile = action.payload.profile;
+        state.favorites = action.payload.favorites;
+        state.orders = action.payload.orders;
         state.isLoading = false;
       }
     },
@@ -140,11 +130,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const {
-  setAuthComponent,
-  setJwt,
-  setIsLogined,
-  setPhoneNumber,
-} = authSlice.actions;
+export const { setAuthComponent, setIsLogined, setPhone } = authSlice.actions;
 
 export default authSlice.reducer;

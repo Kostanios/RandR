@@ -21,6 +21,7 @@ const EstCardStub = () => {
 const EstCard = ({
   stub,
   title,
+  address,
   linkTo,
   photo,
   withIconsItems,
@@ -47,6 +48,7 @@ const EstCard = ({
         </div>
         <div className={styles.cardBody}>
           <div className={styles.cardHeading}>{title}</div>
+          <div className={styles.cardAddress}>{address}</div>
           <div className={styles.itemsLineWrapperWithIcons}>
             <ItemsLineWithIcons menuItems={withIconsItems} />
           </div>

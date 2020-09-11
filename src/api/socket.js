@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import io from 'socket.io-client';
 import { useDispatch } from 'react-redux';
 
@@ -10,6 +11,8 @@ const socket = io(config.socketUrl);
 export default () => {
   const dispatch = useDispatch();
 
-  socket.on('SET_APP_ID', (id) => dispatch(setAppId(id)));
-  socket.on('UPDATE_DATA', (data) => dispatch(updateData(data)));
+  useEffect(() => {
+    socket.on('SET_APP_ID', (id) => dispatch(setAppId(id)));
+    socket.on('UPDATE_DATA', (data) => dispatch(updateData(data)));
+  }, []);
 };

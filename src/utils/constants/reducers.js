@@ -7,12 +7,10 @@ export const SET_IS_CONNECTED = 'setIsConnected';
 export const SET_BOTTOM_SHEET = 'setBottomSheet';
 export const SET_NAVIGATION_VISIBILITY = 'setNavigationVisibility';
 export const SET_APP_ID = 'setAppId';
-export const PIN = 'pin';
 
 // user
-export const SET_JWT = 'setJwt';
-export const SET_PHONE_NUMBER = 'setPhoneNumber';
-export const LOG_IN = 'logIn';
+export const SET_PHONE = 'setPhone';
+export const REQUEST_OTP = 'requestOtp';
 export const CONFIRM_OTP = 'confirmOtp';
 export const SET_AUTH_COMPONENT = 'setAuthComponent';
 export const AUTH = 'auth';
@@ -22,6 +20,7 @@ export const SET_GLOBAL_WINDOW_COMPONENT = 'setGlobalWindowComponent';
 export const UPDATE_GLOBAL_WINDOW_COMPONENT = 'updateGlobalWindowComponent';
 export const CLEAR_GLOBAL_WINDOW_COMPONENT = 'clearGlobalWindowComponent';
 export const SET_GLOBAL_WINDOW_PARAMS = 'setGlobalWindowParams';
+export const SET_GALERY_COMPONENT_LIMIT = 'setGaleryComponentLimit';
 
 // bottom sheet
 export const SET_BOTTOM_SHEET_COMPONENT = 'setBottomSheetComponent';

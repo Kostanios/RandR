@@ -7,6 +7,8 @@ import styles from './styles.module.scss';
 import FilterModal from '../../components/FilterModal';
 import { updateData } from '../../redux/slices/dataSlice';
 
+import LocationArrow from '../../components/Svg/LocationArrow';
+
 const SearchBar = () => {
   const dispatch = useDispatch();
   const filters = useSelector((state) => state.data.filters);
@@ -49,6 +51,9 @@ const SearchBar = () => {
           callback={filterSpots}
           filters={filters}
         />
+      </div>
+      <div className={styles.geoLocationContainer}>
+        <LocationArrow />
       </div>
     </div>
   );

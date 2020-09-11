@@ -4,6 +4,7 @@ import {
   UPDATE_GLOBAL_WINDOW_COMPONENT,
   CLEAR_GLOBAL_WINDOW_COMPONENT,
   SET_GLOBAL_WINDOW_PARAMS,
+  SET_GALERY_COMPONENT_LIMIT,
 } from 'utils/constants/reducers';
 
 export const globalWindowSlice = createSlice({
@@ -12,6 +13,7 @@ export const globalWindowSlice = createSlice({
     component: {},
     navigateBeforeClose: null,
     modalView: false,
+    galeryComponentLimit: 4,
   },
   reducers: {
     [SET_GLOBAL_WINDOW_COMPONENT]: (state, action) => {
@@ -28,6 +30,9 @@ export const globalWindowSlice = createSlice({
       state.navigateBeforeClose = action.payload.navigateBeforeClose;
       state.modalView = action.payload.modalView;
     },
+    [SET_GALERY_COMPONENT_LIMIT]: (state, action) => {
+      state.galeryComponentLimit = action.payload.galeryComponentLimit;
+    },
   },
 });
 
@@ -36,6 +41,7 @@ export const {
   updateGlobalWindowComponent,
   clearGlobalWindowComponent,
   setGlobalWindowParams,
+  setGaleryComponentLimit,
 } = globalWindowSlice.actions;
 
 export default globalWindowSlice.reducer;
