@@ -7,11 +7,10 @@ export const SET_IS_CONNECTED = 'setIsConnected';
 export const SET_BOTTOM_SHEET = 'setBottomSheet';
 export const SET_NAVIGATION_VISIBILITY = 'setNavigationVisibility';
 export const SET_APP_ID = 'setAppId';
-export const PIN = 'pin';
 
 // user
 export const SET_PHONE = 'setPhone';
-export const LOG_IN = 'logIn';
+export const REQUEST_OTP = 'requestOtp';
 export const CONFIRM_OTP = 'confirmOtp';
 export const SET_AUTH_COMPONENT = 'setAuthComponent';
 export const AUTH = 'auth';

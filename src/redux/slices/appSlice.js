@@ -1,8 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { INITIAL_LATLON } from 'utils/constants/map';
-import DataAPI from 'api/data';
 import {
-  PIN,
   SET_LOADED,
   SET_LOCATION,
   SET_USER_LOCATION,
@@ -13,10 +11,6 @@ import {
   SET_APP_ID,
 } from 'utils/constants/reducers';
 import md from 'utils/mobileDetector';
-
-export const pinThunk = createAsyncThunk(PIN, async () => {
-  await DataAPI.pin();
-});
 
 export const appSlice = createSlice({
   name: 'app',
@@ -67,23 +61,6 @@ export const appSlice = createSlice({
     },
     [SET_NAVIGATION_VISIBILITY]: (state, action) => {
       state.isNavigationVisible = action.payload;
-    },
-  },
-  extraReducers: {
-    [pinThunk.pending]: (state) => {
-      if (!state.isLoading) {
-        state.isLoading = true;
-      }
-    },
-    [pinThunk.fulfilled]: (state, action) => {
-      if (state.isLoading) {
-        state.isConnected = true;
-        state.isLoading = false;
-      }
-    },
-    [pinThunk.rejected]: (state, action) => {
-      console.warn(action.error);
-      state.isLoading = false;
     },
   },
 });

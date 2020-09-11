@@ -5,7 +5,6 @@ export default {
     'https://randr-socket.herokuapp.com?token=qnyolcAwbWfoo69k5iTpsjNY88WZPHIa',
   version: '/v1',
   endpoints: {
-    pin: '/',
     auth: {
       login: '/auth',
       requestOtp: '/auth/phone-request',
