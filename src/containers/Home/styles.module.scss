@@ -19,3 +19,8 @@
     padding: 0 14px;
   }
 }
+@media (max-width: 500px) {
+  .searchBarWrapper {
+    height: 100px;
+  }
+}

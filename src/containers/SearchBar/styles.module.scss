@@ -12,11 +12,13 @@
 }
 
 .searchBarContainer {
+  margin: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: calc(100% - 40px);
   height: 100%;
+  min-width: 280px;
   border-radius: 17.5px;
   background-color: $background-color-white;
   box-shadow: $box-shadow;
@@ -73,6 +75,7 @@
 .filtersContainer {
   height: 100%;
   width: 206px;
+  margin: 5px;
 }
 
 .filtersButton {
@@ -104,6 +107,7 @@
 }
 
 .geoLocationContainer {
+  margin: 5px;
   border: 1px solid white;
   border-radius: 22px;
   min-width: 45px;
@@ -134,8 +138,31 @@
   }
 }
 
+@media (max-width: 1000px) {
+  .searchBarInput {
+    &::placeholder {
+      font-size: 20px;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .searchBarInput {
+    &::placeholder {
+      font-size: 14px;
+    }
+  }
+}
+
 @media (max-width: 640px) {
   .searchWrapper {
     width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .searchWrapper {
+    flex-wrap: wrap;
+    justify-content: space-around;
   }
 }

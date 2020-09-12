@@ -4,7 +4,6 @@
   display: block;
   box-sizing: border-box;
   width: 350px;
-  min-width: 350px;
   margin: 10px 0px;
   border-radius: 15px;
   overflow: hidden;
@@ -26,6 +25,12 @@
     &:active {
       box-shadow: $box-shadow;
     }
+  }
+  @media (max-width: 810px) {
+    width: 300px;
+  }
+  @media (max-width: 690px) {
+    width: 250px;
   }
 }
 .cardHeader {
