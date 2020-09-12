@@ -8,7 +8,6 @@ import Map from 'containers/Map';
 import Home from 'containers/Home';
 import Favorite from 'containers/Favorite';
 import Navigation from 'containers/Navigation';
-import Footer from 'containers/Footer';
 import Auth from 'containers/Auth';
 import {
   MAP_ROUTE,
@@ -63,7 +62,6 @@ const App = () => {
           <Route path="/" component={Home} />
         </CacheSwitch>
         <GlobalWindow />
-        <Footer />
         {isNavigationVisible && <Navigation renderMobile={isMobile} />}
       </div>
     </Router>

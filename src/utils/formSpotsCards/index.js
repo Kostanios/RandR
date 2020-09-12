@@ -3,6 +3,7 @@ import EstCard from 'components/Establishment/Card';
 import NoPhoto from 'utils/assets/no-photo.png';
 import config from 'api/config';
 import styles from './styles.module.scss';
+import calculateCurrentRating from '../../utils/constants/calculateCurrentRating';
 
 function formWithIconsItems(spot) {
   const items = [];
@@ -27,17 +28,7 @@ function formWithoutIconsItems(spot) {
   return items;
 }
 
-function calculateCurrentRating(ratingObj) {
-  let currentRating = 0;
-  let categoryNumber = 0;
-  for (let category in ratingObj) {
-    currentRating += ratingObj[category];
-    categoryNumber++;
-  }
-  return currentRating / categoryNumber.toFixed(1);
-}
 export default function (baseUrl, spotsData) {
-  console.log(spotsData);
   let formedCards = [];
   if (spotsData.length) {
     formedCards = spotsData.map((spot) => {

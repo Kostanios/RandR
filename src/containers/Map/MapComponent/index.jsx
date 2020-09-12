@@ -27,7 +27,7 @@ const MapComponent = () => {
           coordinates={[spot.longitude, spot.latitude]}
           properties={{ id: spot.id }}
           onClick={() => {
-            dispatch(setCurrentSpot({ id: spot.id }));
+            // dispatch(setCurrentSpot({ id: spot.id }));
             dispatch(setBottomSheetComponent({ name: COMPONENT_SPOT_PAGE }));
             dispatch(setBottomSheetPosition(2));
           }}

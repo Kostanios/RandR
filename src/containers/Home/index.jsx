@@ -10,6 +10,7 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import { CacheSwitch } from 'react-router-cache-route/index';
 import styles from './styles.module.scss';
 import Collections from '../Collections';
+import Footer from 'containers/Footer';
 
 export default () => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ export default () => {
         <Route path={`${routeMatch.path}:spotId`} component={SpotPageTrigger} />
       </Switch>
       <ShowMoreButton />
+      <Footer />
     </div>
   );
 };

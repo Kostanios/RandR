@@ -9,10 +9,12 @@ import {
 } from 'redux/slices/globalWindowSlice';
 import { COMPONENT_SPOT_PAGE } from 'utils/constants/components';
 import config from 'api/config';
+import StarIcon from '../../components/Svg/StarIcon';
 import NoPhoto from 'utils/assets/no-photo.png';
 import ActionButton from 'components/ActionButton';
 import CameraIcon from 'components/Svg/CameraIcon';
 import styles from './styles.module.scss';
+import calculateCurrentRating from 'utils/constants/calculateCurrentRating';
 
 const SpotPage = () => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
@@ -27,10 +29,12 @@ const SpotPage = () => {
   if (!currentSpot) {
     return <SpotPageStub />;
   }
+  console.log(currentSpot);
   const headerPhoto =
-    currentSpot.photos && currentSpot.photos.length
-      ? `${config.baseUrl}${currentSpot.photos[0].url}`
+    currentSpot.images && currentSpot.images.length
+      ? currentSpot.images[0]
       : NoPhoto;
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
@@ -44,8 +48,11 @@ const SpotPage = () => {
         />
         <div className={styles.headerContent}>
           <div className={styles.leftSide}>
-            <div className={styles.rating}>{currentSpot.rating}</div>
-            <div className={styles.title}>{currentSpot.title}</div>
+            <div className={styles.rating}>
+              <StarIcon />
+              <div>{calculateCurrentRating(currentSpot.rating)}</div>
+            </div>
+            <div className={styles.title}>{currentSpot.name}</div>
           </div>
           <div className={styles.rightSide}>
             <div className={styles.morePhotos}>
@@ -79,7 +86,9 @@ const SpotPage = () => {
         >
           <div>
             <div className={styles.contentBlockHeading}>Адрес</div>
-            <div className={styles.contentBlockText}>{currentSpot.address}</div>
+            <div className={styles.contentBlockText}>
+              {currentSpot.geo.address}
+            </div>
           </div>
           <div className={styles.contentBlockButton}>
             <ActionButton fullWidth buttonText="Показать на карте" />
@@ -88,7 +97,7 @@ const SpotPage = () => {
         <div className={styles.contentBlock}>
           <div className={styles.contentBlockHeading}>Режим работы</div>
           <div className={styles.contentBlockText}>
-            Пн-Вс: {currentSpot.time}
+            {/* Пн-Вс: {currentSpot.time} */}
           </div>
         </div>
       </div>
@@ -148,12 +157,12 @@ const SpotPageStub = () => (
 export const SpotPageTrigger = () => {
   const dispatch = useDispatch();
   const { spotId } = useParams();
+  console.log('spotId-' + spotId);
   useEffect(() => {
-    dispatch(setCurrentSpot({ id: +spotId }));
+    dispatch(setCurrentSpot({ id: spotId }));
     dispatch(setGlobalWindowParams({ navigateBeforeClose: '/' }));
     dispatch(setGlobalWindowComponent({ name: COMPONENT_SPOT_PAGE }));
     return () => {
-      dispatch(setCurrentSpot({ id: undefined }));
       dispatch(clearGlobalWindowComponent());
     };
   });

@@ -34,7 +34,8 @@ export const spotSlice = createSlice({
   reducers: {
     [SET_CURRENT_SPOT]: (state, action) => {
       state.id = action.payload.id;
-      if (typeof action.payload.id === 'number') {
+      if (typeof action.payload.id === 'string') {
+        console.log(action);
         state.currentSpot = state.spotsData.find(
           (spot) => spot.id === action.payload.id
         );
