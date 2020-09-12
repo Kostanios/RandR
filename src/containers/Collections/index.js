@@ -9,7 +9,7 @@ import 'swiper/swiper.scss';
 
 const Collections = () => {
   const params = {
-    slidesPerView: 3,
+    slidesPerView: 1,
     spaceBetween: 30,
     loop: true,
     navigation: {
@@ -19,7 +19,12 @@ const Collections = () => {
     breakpoints: {
       1024: {
         slidesPerView: 4,
-        spaceBetween: 30,
+      },
+      850: {
+        slidesPerView: 3,
+      },
+      500: {
+        slidesPerView: 2,
       },
     },
   };

@@ -14,7 +14,6 @@ import NoPhoto from 'utils/assets/no-photo.png';
 import ActionButton from 'components/ActionButton';
 import CameraIcon from 'components/Svg/CameraIcon';
 import styles from './styles.module.scss';
-import calculateCurrentRating from 'utils/constants/calculateCurrentRating';
 
 const SpotPage = () => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
@@ -50,7 +49,7 @@ const SpotPage = () => {
           <div className={styles.leftSide}>
             <div className={styles.rating}>
               <StarIcon />
-              <div>{calculateCurrentRating(currentSpot.rating)}</div>
+              <div>{currentSpot.rating.overall}</div>
             </div>
             <div className={styles.title}>{currentSpot.name}</div>
           </div>

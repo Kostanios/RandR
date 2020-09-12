@@ -3,12 +3,11 @@ import EstCard from 'components/Establishment/Card';
 import NoPhoto from 'utils/assets/no-photo.png';
 import config from 'api/config';
 import styles from './styles.module.scss';
-import calculateCurrentRating from '../../utils/constants/calculateCurrentRating';
 
 function formWithIconsItems(spot) {
   const items = [];
   if (spot.rating) {
-    let rating = calculateCurrentRating(spot.rating);
+    let rating = spot.rating.overall;
     items.push({ icon: 'STAR_ICON', value: `${rating}` });
   }
   if (spot.bill) {
