@@ -1,5 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { AUTH_ROUTE, CONFIRM_ROUTE } from 'utils/constants/routeNames';
 import { setPhone } from 'redux/slices/authSlice';
 import ActionButton from 'components/ActionButton';
 import styles from './styles.module.scss';
@@ -27,7 +30,9 @@ export default () => {
         placeholder="Номер телефона"
         type="tel"
       />
-      <ActionButton buttonText="Подтвердить" callback={_confirmPhone} />
+      <Link to={`/${CONFIRM_ROUTE}`}>
+        <ActionButton buttonText="Подтвердить" callback={_confirmPhone} />
+      </Link>
     </div>
   );
 };

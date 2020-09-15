@@ -9,10 +9,12 @@ import Home from 'containers/Home';
 import Favorite from 'containers/Favorite';
 import Navigation from 'containers/Navigation';
 import Auth from 'containers/Auth';
+import Confirm from 'containers/Auth/ConfirmOtp';
 import {
   MAP_ROUTE,
   FAVORITE_ROUTE,
   AUTH_ROUTE,
+  CONFIRM_ROUTE,
 } from 'utils/constants/routeNames';
 import GlobalWindow from 'containers/GlobalWindow';
 import socket from 'api/socket';
@@ -59,6 +61,7 @@ const App = () => {
           <Route path={`/${FAVORITE_ROUTE}`} component={Favorite} />
           <CacheRoute path={`/${MAP_ROUTE}`} when="always" component={Map} />
           <Route path={`/${AUTH_ROUTE}`} component={Auth} />
+          <Route path={`/${CONFIRM_ROUTE}`} component={Confirm} />
           <Route path="/" component={Home} />
         </CacheSwitch>
         <GlobalWindow />
