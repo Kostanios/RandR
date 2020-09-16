@@ -1,19 +1,20 @@
 import React, { useState, useRef } from 'react';
+import styles from './styles.module.scss';
 
 const DELETE = 46;
 const BACKSPACE = 8;
 const pasword = '111111';
 
 const SellInput = ({ sellNumber }) => {
-  const [lastIndex, setLastIndex] = useState(null);
   const confirm = useRef(null);
   const [code, setCode] = useState(new Array(sellNumber).fill(''));
+  const [lastIndex, setLastIndex] = useState(0);
 
   if (code.join('').length === pasword.length) {
     if (code.join('') !== pasword) {
       confirm.current = false;
       setCode(new Array(sellNumber).fill(''));
-      setLastIndex(null);
+      setLastIndex(0);
     } else {
       //dispatch(setProfile)
       document.location.href = '/';
@@ -21,23 +22,26 @@ const SellInput = ({ sellNumber }) => {
   }
 
   return (
-    <div>
-      {code.map((e, i) => {
-        return (
-          <Sell
-            code={code}
-            setCode={setCode}
-            lastIndex={lastIndex}
-            setLastIndex={setLastIndex}
-            value={e}
-            key={i}
-          />
-        );
-      })}
+    <div className={styles.sellInputConatiner}>
+      <div className={styles.sellInput}>
+        {code.map((e, i) => {
+          return (
+            <Sell
+              code={code}
+              setCode={setCode}
+              focusOrNot={lastIndex === i}
+              setLastIndex={setLastIndex}
+              lastIndex={lastIndex}
+              value={e}
+              key={i}
+            />
+          );
+        })}
+      </div>
       {confirm.current === false ? (
-        <div> Пароль неправельный </div>
+        <p> Пароль неправельный </p>
       ) : (
-        <div> введите код из смс </div>
+        <p> введите код из смс </p>
       )}
     </div>
   );
@@ -46,28 +50,26 @@ const Sell = ({
   value,
   code,
   setCode,
-  setConfirm,
+  focusOrNot,
   lastIndex,
   setLastIndex,
 }) => {
   return (
     <input
+      className={focusOrNot ? styles.focusedSell : styles.sell}
       value={value || ''}
       onChange={(e) => {
-        sellFiller(e.target.value, code, setCode, setConfirm, setLastIndex);
+        sellFiller(e.target.value, code, setCode, lastIndex, setLastIndex);
       }}
     />
   );
 };
 
-function sellFiller(value, code, setCode, setConfirm, setLastIndex) {
+function sellFiller(value, code, setCode, lastIndex, setLastIndex) {
   let codecopy = code;
-  let lastSymbolIndex = codecopy.indexOf('');
-  if (lastSymbolIndex > -1) {
-    codecopy[lastSymbolIndex] = value.split('').splice(-1, 1)[0];
-    setCode(codecopy);
-    setLastIndex(lastSymbolIndex);
-  }
+  codecopy[lastIndex] = value.split('').splice(-1, 1)[0];
+  setCode(codecopy);
+  setLastIndex(lastIndex + 1);
 }
 
 export default SellInput;

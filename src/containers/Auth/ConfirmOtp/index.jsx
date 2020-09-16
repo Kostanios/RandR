@@ -26,7 +26,7 @@ export default () => {
         numInputs={4}
       /> */}
       <SellInput sellNumber={6} />
-      <ActionButton buttonText="Отправить" callback={_confirmOtp} />
+      <ActionButton buttonText="другой телефон" />
     </div>
   );
 };
