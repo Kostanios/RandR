@@ -39,9 +39,9 @@ const SellInput = ({ sellNumber }) => {
         })}
       </div>
       {confirm.current === false ? (
-        <p> Пароль неправельный </p>
+        <p className={styles.alert}> Пароль неправельный </p>
       ) : (
-        <p> введите код из смс </p>
+        <p className={styles.message}> введите код из смс </p>
       )}
     </div>
   );

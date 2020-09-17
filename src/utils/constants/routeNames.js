@@ -2,6 +2,7 @@ export const AUTH_ROUTE = 'auth';
 export const LOGIN_ROUTE = 'login';
 export const VERIFICATION_ROUTE = 'verification';
 export const CONFIRM_ROUTE = 'confirm';
+export const RERESTRATION_ROUTE = 'regestration';
 
 export const HOME_ROUTE = 'home';
 export const PROFILE_ROUTE = 'profile';

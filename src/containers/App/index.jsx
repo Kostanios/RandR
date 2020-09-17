@@ -10,7 +10,9 @@ import Favorite from 'containers/Favorite';
 import Navigation from 'containers/Navigation';
 import Auth from 'containers/Auth';
 import Confirm from 'containers/Auth/ConfirmOtp';
+import Regestration from 'containers/Auth/Regestration';
 import {
+  RERESTRATION_ROUTE,
   MAP_ROUTE,
   FAVORITE_ROUTE,
   AUTH_ROUTE,
@@ -62,6 +64,7 @@ const App = () => {
           <CacheRoute path={`/${MAP_ROUTE}`} when="always" component={Map} />
           <Route path={`/${AUTH_ROUTE}`} component={Auth} />
           <Route path={`/${CONFIRM_ROUTE}`} component={Confirm} />
+          <Route path={`/${RERESTRATION_ROUTE}`} component={Regestration} />
           <Route path="/" component={Home} />
         </CacheSwitch>
         <GlobalWindow />

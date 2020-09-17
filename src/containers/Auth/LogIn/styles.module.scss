@@ -1,4 +1,23 @@
 @import 'utils/constants/variables';
+.regestrationText {
+}
+.regestrationLink {
+  border: 2px solid #cacaca;
+  padding: 10px 20px;
+  border-radius: 20px;
+  &:hover {
+    border: 2px solid #2dbb54;
+    background-color: #cacaca;
+  }
+}
+.regestrationContainer {
+  align-items: center;
+  width: 100%;
+  margin-top: 40px;
+  border-top: 2px solid #cacaca;
+  display: flex;
+  flex-direction: column;
+}
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -25,7 +44,8 @@
   border-top: none;
   border-right: none;
   border-left: none;
-  border-bottom: 2px solid $border-color-gray-light;
+  border-bottom: 2px solid #cacaca;
+
   outline: none;
   transition: border-bottom $transition-time-2s;
   &:hover {
@@ -35,6 +55,7 @@
     border-bottom: 2px solid $border-color-green;
   }
 }
+
 .text {
   margin-top: 20px;
   text-align: center;

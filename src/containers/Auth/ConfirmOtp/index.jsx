@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 //import OtpInput from 'components/OtpInput';
+import { AUTH_ROUTE } from 'utils/constants/routeNames';
 import SellInput from 'components/SellInput';
 import ActionButton from 'components/ActionButton';
 import { confirmOtpThunk } from 'redux/slices/authSlice';
@@ -26,7 +28,9 @@ export default () => {
         numInputs={4}
       /> */}
       <SellInput sellNumber={6} />
-      <ActionButton buttonText="другой телефон" />
+      <Link to={`/${AUTH_ROUTE}`}>
+        <ActionButton buttonText="другой телефон" />
+      </Link>
     </div>
   );
 };
