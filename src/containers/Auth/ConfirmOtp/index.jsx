@@ -19,18 +19,20 @@ export default () => {
 
   return (
     <div className={styles.wrapper}>
-      <p className={styles.textHeading}>
-        Введите код для подтверждения вашего номера телефона
-      </p>
-      {/* <OtpInput
-        onChange={(otp) => setOtp(otp)}
-        isInputNum={true}
-        numInputs={4}
-      /> */}
-      <SellInput sellNumber={6} />
-      <Link to={`/${AUTH_ROUTE}`}>
-        <ActionButton buttonText="другой телефон" />
-      </Link>
+      <div className={styles.container}>
+        <p className={styles.textHeading}>
+          Введите код для подтверждения вашего номера телефона
+        </p>
+        {/* <OtpInput
+          onChange={(otp) => setOtp(otp)}
+          isInputNum={true}
+          numInputs={4}
+        /> */}
+        <SellInput sellNumber={6} />
+        <Link className={styles.a} to={`/${AUTH_ROUTE}`}>
+          <ActionButton buttonText="другой телефон" />
+        </Link>
+      </div>
     </div>
   );
 };

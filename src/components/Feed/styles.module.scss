@@ -26,3 +26,9 @@
   line-height: 22px;
   color: $text-color-main;
 }
+
+@media (max-width: 568px) {
+  .feedHeading {
+    text-align: center;
+  }
+}

@@ -67,7 +67,7 @@ const Regestration = () => {
       <div className={styles.regestrationWindow}>
         <h1 className={styles.welcomeToRandR}>
           {' '}
-          добро пожаловать в Reverse And Relax
+          Добро пожаловать в Reverse And Relax
         </h1>
         <p className={styles.regestrationHeader}>
           для регестрации укажите свой настоящий номер мобильного телефона и
@@ -81,6 +81,7 @@ const Regestration = () => {
           onChange={_setPhone}
         />
         <input
+          autocomplete="off"
           type="password"
           className={styles.input}
           placeholder={'введите пароль'}
@@ -88,6 +89,7 @@ const Regestration = () => {
           onBlur={PasswordOnBlurHandler}
         />
         <input
+          autocomplete="off"
           type="password"
           className={styles.input}
           placeholder={'подтвердите пароль'}

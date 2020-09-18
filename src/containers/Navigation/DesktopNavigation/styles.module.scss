@@ -3,6 +3,7 @@
 .navigation {
   z-index: 5;
   display: flex;
+  flex-wrap: wrap-reverse;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
@@ -93,4 +94,10 @@
   font-size: 20px;
   line-height: 24px;
   letter-spacing: 0.05em;
+}
+
+@media (max-width: 534px) {
+  .navigation {
+    height: 130px;
+  }
 }
