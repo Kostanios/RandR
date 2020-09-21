@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 //import OtpInput from 'components/OtpInput';
@@ -12,9 +12,9 @@ import styles from './styles.module.scss';
 export default () => {
   const dispatch = useDispatch();
   const [otp, setOtp] = useState('');
-
+  const phoneNumber = useSelector((state) => state.auth.phoneNumber);
   const _confirmOtp = () => {
-    dispatch(confirmOtpThunk(otp));
+    dispatch(confirmOtpThunk(phoneNumber, otp));
   };
 
   return (
@@ -28,7 +28,7 @@ export default () => {
           isInputNum={true}
           numInputs={4}
         /> */}
-        <SellInput sellNumber={6} />
+        <SellInput _confirmOtp={_confirmOtp} setOtp={setOtp} sellNumber={6} />
         <Link className={styles.a} to={`/${AUTH_ROUTE}`}>
           <ActionButton buttonText="другой телефон" />
         </Link>

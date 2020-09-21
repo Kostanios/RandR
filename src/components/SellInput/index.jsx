@@ -5,7 +5,8 @@ const DELETE = 46;
 const BACKSPACE = 8;
 const pasword = '111111';
 
-const SellInput = ({ sellNumber }) => {
+const SellInput = ({ _confirmOtp, setOtp, sellNumber }) => {
+  _confirmOtp();
   const confirm = useRef(null);
   const [code, setCode] = useState(new Array(sellNumber).fill(''));
   const [lastIndex, setLastIndex] = useState(0);
@@ -27,6 +28,7 @@ const SellInput = ({ sellNumber }) => {
         {code.map((e, i) => {
           return (
             <Sell
+              setOtp={setOtp}
               code={code}
               setCode={setCode}
               focusOrNot={lastIndex === i}
@@ -47,6 +49,7 @@ const SellInput = ({ sellNumber }) => {
   );
 };
 const Sell = ({
+  setOtp,
   value,
   code,
   setCode,
@@ -56,19 +59,28 @@ const Sell = ({
 }) => {
   return (
     <input
+      autoFocus="true"
       className={focusOrNot ? styles.focusedSell : styles.sell}
       value={value || ''}
       onChange={(e) => {
-        sellFiller(e.target.value, code, setCode, lastIndex, setLastIndex);
+        sellFiller(
+          e.target.value,
+          code,
+          setCode,
+          lastIndex,
+          setLastIndex,
+          setOtp
+        );
       }}
     />
   );
 };
 
-function sellFiller(value, code, setCode, lastIndex, setLastIndex) {
+function sellFiller(value, code, setCode, lastIndex, setLastIndex, setOtp) {
   let codecopy = code;
   codecopy[lastIndex] = value.split('').splice(-1, 1)[0];
   setCode(codecopy);
+  setOtp(codecopy.join(''));
   setLastIndex(lastIndex + 1);
 }
 
