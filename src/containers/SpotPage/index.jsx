@@ -10,13 +10,16 @@ import {
 import { COMPONENT_SPOT_PAGE } from 'utils/constants/components';
 import config from 'api/config';
 import StarIcon from '../../components/Svg/StarIcon';
+import { info, reviews, pages } from './const/const';
 import NoPhoto from 'utils/assets/no-photo.png';
 import ActionButton from 'components/ActionButton';
 import CameraIcon from 'components/Svg/CameraIcon';
+import ChooseLine from './chooseLIne/index';
 import styles from './styles.module.scss';
 
 const SpotPage = () => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [page, setPage] = useState(info);
   const currentId = useSelector((state) => state.data.id);
   const currentSpot = useSelector((state) => state.data.currentSpot);
   useEffect(() => {
@@ -61,15 +64,15 @@ const SpotPage = () => {
           </div>
         </div>
       </div>
-      <div className={styles.content}>
-        <div
-          className={`${styles.contentBlock} ${styles.contentBlockHorizontal}`}
-        >
-          <div className={styles.contentBlockHeading}>О ресторане</div>
-          <div className={styles.contentBlockButton}>
-            <ActionButton fullWidth buttonText="Забронировать стол" />
-          </div>
+      <div className={styles.chooseLine}>
+        <div className={styles.pageLinkContainer}>
+          <ChooseLine page={page} setPage={setPage} />
         </div>
+        <div className={styles.actionButtonContainer}>
+          <ActionButton fullWidth buttonText="Забронировать стол" />
+        </div>
+      </div>
+      <div className={styles.content}>
         <div className={styles.contentBlock}>
           <div className={styles.contentBlockHeading}>Кухня</div>
           <div className={styles.contentBlockText}>{currentSpot.cuisine}</div>
@@ -89,19 +92,48 @@ const SpotPage = () => {
               {currentSpot.geo.address}
             </div>
           </div>
-          <div className={styles.contentBlockButton}>
-            <ActionButton fullWidth buttonText="Показать на карте" />
-          </div>
         </div>
         <div className={styles.contentBlock}>
           <div className={styles.contentBlockHeading}>Режим работы</div>
           <div className={styles.contentBlockText}>
-            {/* Пн-Вс: {currentSpot.time} */}
+            {<WorkingHoursObject obj={currentSpot.workingHours} />}
           </div>
         </div>
       </div>
     </div>
   );
+};
+
+const WorkingHoursObject = ({ obj }) => {
+  const days = Object.keys(obj);
+  const schedule = days.reduce((p, c, i, a) => {
+    console.log(p);
+    if (p.length === 0) {
+      p.push({
+        weekDays: c,
+        time: obj[c].time,
+      });
+      return p;
+    } else if (p[p.length - 1].time !== obj[c].time) {
+      p.push({
+        weekDays: c,
+        time: obj[c].time,
+      });
+      return p;
+    } else {
+      console.log('второй день');
+      p[p.length - 1].weekDays = p[p.length - 1].weekDays.replace(
+        /-[A-z]*/g,
+        ''
+      );
+      p[p.length - 1].weekDays = p[p.length - 1].weekDays + `-${c}`;
+      return p;
+    }
+    console.log(c);
+    console.log(obj[c].time);
+  }, []);
+  console.log(schedule);
+  return <div></div>;
 };
 
 const SpotPageStub = () => (

@@ -1,26 +1,40 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { confirmOtpThunk } from 'redux/slices/authSlice';
+import { useSelector, useDispatch } from 'react-redux';
 import styles from './styles.module.scss';
 
 const DELETE = 46;
 const BACKSPACE = 8;
-const pasword = '111111';
+const pasword = '1111';
+const SellInput = ({ sellNumber }) => {
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
-const SellInput = ({ _confirmOtp, setOtp, sellNumber }) => {
-  _confirmOtp();
   const confirm = useRef(null);
   const [code, setCode] = useState(new Array(sellNumber).fill(''));
-  const [lastIndex, setLastIndex] = useState(0);
+  const lastIndex = useRef(0);
+  const [otp, setOtp] = useState('');
 
-  if (code.join('').length === pasword.length) {
-    if (code.join('') !== pasword) {
-      confirm.current = false;
-      setCode(new Array(sellNumber).fill(''));
-      setLastIndex(0);
-    } else {
+  async function _confirmOtp() {
+    dispatch(confirmOtpThunk(Number(otp)));
+  }
+
+  async function answerCheck() {
+    await _confirmOtp();
+    if (code.join('') === pasword) {
       //dispatch(setProfile)
       document.location.href = '/';
+    } else {
+      //confirm.current = false;
     }
+    lastIndex.current = 0;
   }
+  useEffect(() => {
+    if (code.join('').length === 4) {
+      answerCheck();
+      setCode(new Array(sellNumber).fill(''));
+    }
+  });
 
   return (
     <div className={styles.sellInputConatiner}>
@@ -31,8 +45,7 @@ const SellInput = ({ _confirmOtp, setOtp, sellNumber }) => {
               setOtp={setOtp}
               code={code}
               setCode={setCode}
-              focusOrNot={lastIndex === i}
-              setLastIndex={setLastIndex}
+              focusOrNot={lastIndex.current === i}
               lastIndex={lastIndex}
               value={e}
               key={i}
@@ -48,40 +61,25 @@ const SellInput = ({ _confirmOtp, setOtp, sellNumber }) => {
     </div>
   );
 };
-const Sell = ({
-  setOtp,
-  value,
-  code,
-  setCode,
-  focusOrNot,
-  lastIndex,
-  setLastIndex,
-}) => {
+const Sell = ({ setOtp, value, code, setCode, focusOrNot, lastIndex }) => {
   return (
     <input
-      autoFocus="true"
+      autoFocus={true}
       className={focusOrNot ? styles.focusedSell : styles.sell}
       value={value || ''}
       onChange={(e) => {
-        sellFiller(
-          e.target.value,
-          code,
-          setCode,
-          lastIndex,
-          setLastIndex,
-          setOtp
-        );
+        sellFiller(e.target.value, code, setCode, lastIndex, setOtp);
       }}
     />
   );
 };
 
-function sellFiller(value, code, setCode, lastIndex, setLastIndex, setOtp) {
+function sellFiller(value, code, setCode, lastIndex, setOtp) {
   let codecopy = code;
-  codecopy[lastIndex] = value.split('').splice(-1, 1)[0];
+  codecopy[lastIndex.current] = value.split('').splice(-1, 1)[0];
+  lastIndex.current = lastIndex.current + 1;
   setCode(codecopy);
   setOtp(codecopy.join(''));
-  setLastIndex(lastIndex + 1);
 }
 
 export default SellInput;

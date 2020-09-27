@@ -12,31 +12,21 @@ import { CONFIRM_ROUTE } from 'utils/constants/routeNames';
 const Regestration = () => {
   const dispatch = useDispatch();
   const phoneNumber = useSelector((state) => state.auth.phoneNumber);
-  const password = useRef('');
+  const name = useRef('');
   const [confirmState, setConfirmState] = useState(false);
 
-  const passwordOnChangeHandler = (e) => {
-    password.current = e.target.value;
+  const nameOnChangeHandler = (e) => {
+    name.current = e.target.value;
   };
-  const repeatPasswordOnChangeHandler = (e) => {
-    if (password.current === e.target.value) {
-      setConfirmState(true);
-    }
-  };
-  const RepeatPasswordOnBlurHandler = (e) => {
-    let target = e.target;
-    if (target.value !== password.current) {
-      target.className = styles.alertInput;
-      target.placeholder = 'пароли не совпадают';
-      e.target.value = '';
-    }
-  };
-  const PasswordOnBlurHandler = (e) => {
+
+  const NameOnBlurHandler = (e) => {
     let target = e.target;
     if (target.value.length < 4 || target.value.length >= 12) {
       target.className = styles.alertInput;
       e.target.value = '';
-      target.placeholder = 'пароль должен быть от 4 до 12';
+      target.placeholder = 'имя должно быть от 4 до 12';
+    } else {
+      setConfirmState(true);
     }
   };
   const _setPhone = (value) => {
@@ -82,19 +72,11 @@ const Regestration = () => {
         />
         <input
           autocomplete="off"
-          type="password"
+          type="text"
           className={styles.input}
-          placeholder={'введите пароль'}
-          onChange={passwordOnChangeHandler}
-          onBlur={PasswordOnBlurHandler}
-        />
-        <input
-          autocomplete="off"
-          type="password"
-          className={styles.input}
-          placeholder={'подтвердите пароль'}
-          onBlur={RepeatPasswordOnBlurHandler}
-          onChange={repeatPasswordOnChangeHandler}
+          placeholder={'введите имя'}
+          onChange={nameOnChangeHandler}
+          onBlur={NameOnBlurHandler}
         />
         {confirmState ? <ReadyToConfirmButton /> : <FakeButton />}
       </div>

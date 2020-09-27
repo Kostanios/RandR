@@ -1,12 +1,15 @@
 @import 'utils/constants/variables.scss';
 .wrapper {
   background-color: $background-color-white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .header {
   position: relative;
   z-index: 1;
   width: 100%;
-  height: 246px;
+  height: 390px;
   &Image {
     object-fit: cover;
     position: absolute;
@@ -108,6 +111,7 @@
   }
 }
 .content {
+  width: 95%;
   position: relative;
   box-sizing: border-box;
   padding: 0 15px;
@@ -195,8 +199,24 @@
     align-items: flex-start;
     flex-direction: column;
   }
-  .contentBlockButton {
-    width: 100%;
-    margin: 7px 0 5px;
-  }
+}
+.chooseLine {
+  width: 60%;
+  height: 50px;
+  display: flex;
+  margin: 0 20px;
+  border-radius: 20px;
+  justify-content: space-between;
+  z-index: 2;
+  background: white;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.pageLinkContainer {
+  display: flex;
+}
+
+.actionButtonContainer {
+  width: 220px;
 }

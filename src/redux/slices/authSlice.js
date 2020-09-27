@@ -21,6 +21,7 @@ export const authThunk = createAsyncThunk(AUTH, async () => {
 
 export const requestOtpThunk = createAsyncThunk(REQUEST_OTP, async (phone) => {
   const response = await AuthAPI.requestOtp(phone);
+  console.log(response);
   return response;
 });
 
@@ -92,10 +93,11 @@ export const authSlice = createSlice({
           isSent: false,
           attempts: 0,
         };
+        console.log(action);
         state.isLogined = true;
-        state.phone = action.payload.user.phone;
-        state.isAdmin = action.payload.user.admin.length > 0;
-        state.profile = action.payload.user.profile;
+        state.phone = action.payload.data.phone;
+        state.isAdmin = action.payload.data.admin.length > 0;
+        state.profile = action.payload.data.profile;
         state.favorites = action.payload.favorites;
         state.orders = action.payload.orders;
         state.isLoading = false;

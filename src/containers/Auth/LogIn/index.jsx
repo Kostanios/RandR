@@ -34,11 +34,6 @@ export default () => {
         onChange={_setPhone}
         //onBlur={()=>{alert()}}
       />
-      <input
-        type="password"
-        className={styles.input}
-        placeholder={'введите пароль'}
-      />
       <Link className={styles.actionButton} to={`/${CONFIRM_ROUTE}`}>
         <ActionButton buttonText="Подтвердить" callback={_confirmPhone} />
       </Link>
