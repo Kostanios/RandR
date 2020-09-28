@@ -1,3 +1,3 @@
-export const info = 'info';
-export const reviews = 'reviews';
+export const info = 'Описание';
+export const reviews = 'Отзывы';
 export const pages = [info, reviews];

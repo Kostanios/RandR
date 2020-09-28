@@ -1,0 +1,25 @@
+@import 'utils/constants/variables.scss';
+.headerImage {
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: calc(100% + 20px);
+  max-width: 100%;
+  max-height: calc(100% + 20px);
+  opacity: 1;
+  transition: $opacity-transition-1s;
+  &.hideImageForAnimation {
+    opacity: 0.01;
+  }
+}
+.cardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  height: 410px;
+  cursor: pointer;
+}

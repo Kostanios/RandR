@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { setCurrentSpot, getSpotByIdThunk } from 'redux/slices/dataSlice';
@@ -8,6 +8,7 @@ import {
   setGlobalWindowParams,
 } from 'redux/slices/globalWindowSlice';
 import { COMPONENT_SPOT_PAGE } from 'utils/constants/components';
+import { RUdays } from 'utils/constants/RUdays';
 import config from 'api/config';
 import StarIcon from '../../components/Svg/StarIcon';
 import { info, reviews, pages } from './const/const';
@@ -16,9 +17,9 @@ import ActionButton from 'components/ActionButton';
 import CameraIcon from 'components/Svg/CameraIcon';
 import ChooseLine from './chooseLIne/index';
 import styles from './styles.module.scss';
+import Slider from './slider/index';
 
 const SpotPage = () => {
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [page, setPage] = useState(info);
   const currentId = useSelector((state) => state.data.id);
   const currentSpot = useSelector((state) => state.data.currentSpot);
@@ -40,14 +41,7 @@ const SpotPage = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <img
-          src={headerPhoto}
-          className={`${styles.headerImage} ${
-            !isImageLoaded ? styles.hideImageForAnimation : ''
-          }`}
-          alt="spot-header"
-          onLoad={() => setIsImageLoaded(true)}
-        />
+        <Slider images={currentSpot.images} />
         <div className={styles.headerContent}>
           <div className={styles.leftSide}>
             <div className={styles.rating}>
@@ -55,12 +49,6 @@ const SpotPage = () => {
               <div>{currentSpot.rating.overall}</div>
             </div>
             <div className={styles.title}>{currentSpot.name}</div>
-          </div>
-          <div className={styles.rightSide}>
-            <div className={styles.morePhotos}>
-              <CameraIcon />
-              <div className={styles.photosAmount}>15</div>
-            </div>
           </div>
         </div>
       </div>
@@ -72,42 +60,33 @@ const SpotPage = () => {
           <ActionButton fullWidth buttonText="Забронировать стол" />
         </div>
       </div>
-      <div className={styles.content}>
-        <div className={styles.contentBlock}>
-          <div className={styles.contentBlockHeading}>Кухня</div>
-          <div className={styles.contentBlockText}>{currentSpot.cuisine}</div>
-        </div>
-        <div className={styles.contentBlock}>
-          <div className={styles.contentBlockHeading}>Описание</div>
-          <div className={styles.contentBlockText}>
-            {currentSpot.description}
-          </div>
-        </div>
-        <div
-          className={`${styles.contentBlock} ${styles.contentBlockHorizontal}`}
-        >
-          <div>
-            <div className={styles.contentBlockHeading}>Адрес</div>
-            <div className={styles.contentBlockText}>
-              {currentSpot.geo.address}
-            </div>
-          </div>
-        </div>
-        <div className={styles.contentBlock}>
-          <div className={styles.contentBlockHeading}>Режим работы</div>
-          <div className={styles.contentBlockText}>
-            {<WorkingHoursObject obj={currentSpot.workingHours} />}
-          </div>
-        </div>
-      </div>
+      {page === info ? (
+        <InfoComponent currentSpot={currentSpot} />
+      ) : page === reviews ? (
+        <div>отзывы</div>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 };
 
 const WorkingHoursObject = ({ obj }) => {
+  const schedule = useMemo(() => sortWorkingHours(obj), [obj]);
+  const scheduleComponents = schedule.map((component) => {
+    return (
+      <div className={styles.scheduleComponent} key={Math.random()}>
+        <div className={styles.scheduleDays}> {component.weekDays} </div>
+        <div className={styles.scheduleWorkingHours}> {component.time} </div>
+      </div>
+    );
+  });
+  return <div className={styles.scheduleContainer}>{scheduleComponents}</div>;
+};
+
+const sortWorkingHours = (obj) => {
   const days = Object.keys(obj);
   const schedule = days.reduce((p, c, i, a) => {
-    console.log(p);
     if (p.length === 0) {
       p.push({
         weekDays: c,
@@ -121,7 +100,6 @@ const WorkingHoursObject = ({ obj }) => {
       });
       return p;
     } else {
-      console.log('второй день');
       p[p.length - 1].weekDays = p[p.length - 1].weekDays.replace(
         /-[A-z]*/g,
         ''
@@ -129,11 +107,55 @@ const WorkingHoursObject = ({ obj }) => {
       p[p.length - 1].weekDays = p[p.length - 1].weekDays + `-${c}`;
       return p;
     }
-    console.log(c);
-    console.log(obj[c].time);
   }, []);
-  console.log(schedule);
-  return <div></div>;
+  return schedule.map((e) => {
+    e.weekDays = e.weekDays
+      .replace(/monday/g, RUdays[0])
+      .replace(/tuesday/g, RUdays[1])
+      .replace(/wednesday/g, RUdays[2])
+      .replace(/thursday/g, RUdays[3])
+      .replace(/friday/g, RUdays[4])
+      .replace(/saturday/g, RUdays[5])
+      .replace(/sunday/g, RUdays[6]);
+    return e;
+  });
+};
+
+const InfoComponent = ({ currentSpot }) => {
+  return (
+    <div className={styles.content}>
+      <div className={styles.contentBlock}>
+        <div className={styles.contentBlockHeading}>Кухня</div>
+        <div className={styles.contentBlockText}>{currentSpot.cuisine}</div>
+      </div>
+      <div className={styles.contentBlock}>
+        <div className={styles.contentBlockHeading}>Описание</div>
+        <div className={styles.contentBlockText}>{currentSpot.description}</div>
+      </div>
+      <div
+        className={`${styles.contentBlock} ${styles.contentBlockHorizontal}`}
+      >
+        <div>
+          <div className={styles.contentBlockHeading}>Адрес</div>
+          <div className={styles.contentBlockText}>
+            {currentSpot.geo.address}
+          </div>
+        </div>
+      </div>
+      <div className={styles.contentBlock}>
+        <div className={styles.contentBlockHeading}>Режим работы</div>
+        <div className={styles.contentBlockText}>
+          {<WorkingHoursObject obj={currentSpot.workingHours} />}
+        </div>
+      </div>
+      <div className={styles.contentBlock}>
+        <div className={styles.contentBlockHeading}>
+          Дополнительная Информация
+        </div>
+        <div className={styles.contentBlockText}>{}</div>
+      </div>
+    </div>
+  );
 };
 
 const SpotPageStub = () => (

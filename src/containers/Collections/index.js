@@ -5,13 +5,13 @@ import CollectionCard from '../../components/CollectionCard';
 import collections from '../../mocks/collections';
 
 import styles from './styles.module.scss';
-import 'swiper/swiper.scss';
 
 const Collections = () => {
   const params = {
     slidesPerView: 1,
     spaceBetween: 30,
     loop: true,
+    slidesPerView: 'auto',
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
@@ -35,6 +35,7 @@ const Collections = () => {
       <CollectionCard key={selection} selection={selection} image={image} />
     );
   });
+  console.log(cardsCollection);
   return (
     <>
       <h2 className={styles.title}>Подборки</h2>

@@ -4,7 +4,14 @@ import { pages } from '../const/const';
 
 const ChooseLine = ({ page, setPage }) => {
   return pages.map((pageName) => {
-    return <LinkToPage page={page} setPage={setPage} name={pageName} />;
+    return (
+      <LinkToPage
+        key={Math.random()}
+        page={page}
+        setPage={setPage}
+        name={pageName}
+      />
+    );
   });
 };
 
@@ -21,7 +28,6 @@ const LinkToPage = ({ page, setPage, name }) => {
   }
   return (
     <div
-      key={name}
       className={status ? styles.activePageLink : styles.pageLink}
       onClick={pageOnClickHandler}
     >

@@ -35,7 +35,7 @@
   align-items: flex-end;
   box-sizing: border-box;
   width: 100%;
-  height: 100%;
+  bottom: 90px;
   padding: 0 25px 20px;
   color: $text-color-white;
   .leftSide,
@@ -219,4 +219,12 @@
 
 .actionButtonContainer {
   width: 220px;
+}
+
+.scheduleComponent {
+  display: flex;
+  justify-content: space-between;
+  width: 220px;
+  font-size: 20px;
+  margin: 10px;
 }
