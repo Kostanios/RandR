@@ -1,13 +1,16 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { confirmOtpThunk } from 'redux/slices/authSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './styles.module.scss';
+import { useHistory } from 'react-router-dom';
 
 const DELETE = 46;
 const BACKSPACE = 8;
 const pasword = '1111';
 const SellInput = ({ sellNumber }) => {
   const auth = useSelector((state) => state.auth);
+  const history = useHistory();
+
   const dispatch = useDispatch();
 
   const confirm = useRef(null);
@@ -20,19 +23,16 @@ const SellInput = ({ sellNumber }) => {
   }
 
   async function answerCheck() {
-    await _confirmOtp();
-    if (code.join('') === pasword) {
-      //dispatch(setProfile)
-      document.location.href = '/';
-    } else {
-      //confirm.current = false;
-    }
-    lastIndex.current = 0;
+    _confirmOtp();
   }
+  useLayoutEffect(() => {
+    if (auth.isLogined) history.push('/');
+  });
   useEffect(() => {
     if (code.join('').length === 4) {
-      answerCheck();
+      lastIndex.current = 0;
       setCode(new Array(sellNumber).fill(''));
+      answerCheck();
     }
   });
 

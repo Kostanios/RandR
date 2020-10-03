@@ -1,0 +1,99 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.logOut {
+  background: white;
+}
+.userBlokContainer {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.userBlok {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  height: 260px;
+  width: 310px;
+}
+.profileImgContainer {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 130px;
+  width: 130px;
+  background: #e9e9ea;
+  border-radius: 65px;
+}
+.userTelephone {
+  text-align: center;
+}
+.userName {
+  text-align: center;
+}
+.actionsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.userInfoContainer {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+.personalData {
+  display: flex;
+  flex-direction: column;
+  & p {
+    padding-left: 20px;
+    color: black;
+  }
+  & div {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+.changeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.changeInfo {
+  position: relative;
+  width: 220px;
+  margin: 15px 20px;
+  height: 35px;
+  border-radius: 20px;
+  outline: none;
+  padding-left: 20px;
+  border: 2px solid #2dbb54;
+  box-sizing: border-box;
+  border-radius: 20px;
+  &:focus::placeholder {
+    color: white;
+  }
+}
+.inputLabel {
+  padding: 0 5px;
+  margin: 8px 40px;
+  position: absolute;
+  font-size: 10px;
+  background: white;
+  z-index: 1;
+}

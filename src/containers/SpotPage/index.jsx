@@ -11,10 +11,9 @@ import { COMPONENT_SPOT_PAGE } from 'utils/constants/components';
 import { RUdays } from 'utils/constants/RUdays';
 import config from 'api/config';
 import StarIcon from '../../components/Svg/StarIcon';
-import { info, reviews, pages } from './const/const';
+import { info, reviews } from './const/const';
 import NoPhoto from 'utils/assets/no-photo.png';
 import ActionButton from 'components/ActionButton';
-import CameraIcon from 'components/Svg/CameraIcon';
 import ChooseLine from './chooseLIne/index';
 import styles from './styles.module.scss';
 import Slider from './slider/index';
@@ -33,10 +32,10 @@ const SpotPage = () => {
     return <SpotPageStub />;
   }
   console.log(currentSpot);
-  const headerPhoto =
-    currentSpot.images && currentSpot.images.length
-      ? currentSpot.images[0]
-      : NoPhoto;
+  // const headerPhoto =
+  //   currentSpot.images && currentSpot.images.length
+  //     ? currentSpot.images[0]
+  //     : NoPhoto;
 
   return (
     <div className={styles.wrapper}>

@@ -1,13 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Logo from 'components/Svg/Logo';
 import LogInUser from '../../../components/Svg/LogInUser';
 import Reservation from '../../../components/Svg/Reservation';
-
-import { AUTH_ROUTE, RESERVATION_ROUTE } from 'utils/constants/routeNames';
+import { setGlobalWindowComponent } from 'redux/slices/globalWindowSlice';
+import {
+  AUTH_ROUTE,
+  RESERVATION_ROUTE,
+  USER_ROUTE,
+} from 'utils/constants/routeNames';
 import { ACTIVE_COLOR, DISABLED_COLOR } from '../../../utils/constants/colors';
+import {
+  COMPONENT_SPOT_PAGE,
+  COMPONENT_LOG_IN,
+  USER_PROFILE,
+} from 'utils/constants/components';
 
 import {
   left,
@@ -17,9 +26,11 @@ import {
   right,
   linkText,
   linkDisabled,
+  profileLink,
 } from './styles.module.scss';
 
 export default () => {
+  const dispatch = useDispatch();
   const isLogined = useSelector((state) => state.auth.isLogined);
   return (
     <div className={navigation}>
@@ -32,13 +43,20 @@ export default () => {
         </Link>
       </div>
       <div className={right}>
-        <LogInUser color={isLogined ? DISABLED_COLOR : ACTIVE_COLOR} />
-        <Link
-          className={isLogined ? linkDisabled : linkText}
-          to={`/${AUTH_ROUTE}`}
-        >
-          Войти
-        </Link>
+        {isLogined ? (
+          <div
+            onClick={() =>
+              dispatch(setGlobalWindowComponent({ name: USER_PROFILE }))
+            }
+            className={profileLink}
+          >
+            <LogInUser color={ACTIVE_COLOR} />
+          </div>
+        ) : (
+          <Link className={linkText} to={`/${AUTH_ROUTE}`}>
+            Войти
+          </Link>
+        )}
         <Reservation color={isLogined ? ACTIVE_COLOR : DISABLED_COLOR} />
         <Link
           className={isLogined ? linkText : linkDisabled}

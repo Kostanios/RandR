@@ -14,11 +14,6 @@ export default () => {
         <p className={styles.textHeading}>
           Введите код для подтверждения вашего номера телефона
         </p>
-        {/* <OtpInput
-          onChange={(otp) => setOtp(otp)}
-          isInputNum={true}
-          numInputs={4}
-        /> */}
         <SellInput sellNumber={4} />
         <Link className={styles.a} to={`/${AUTH_ROUTE}`}>
           <ActionButton buttonText="другой телефон" />
