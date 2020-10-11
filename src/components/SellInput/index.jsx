@@ -15,9 +15,9 @@ const SellInput = ({ sellNumber }) => {
 
   const confirm = useRef(null);
   const [code, setCode] = useState(new Array(sellNumber).fill(''));
-  const lastIndex = useRef(0);
+  const lastIndex = useRef(null);
   const [otp, setOtp] = useState('');
-
+  const [focus, setFocus] = useState(false);
   async function _confirmOtp() {
     dispatch(confirmOtpThunk(Number(otp)));
   }
@@ -42,6 +42,8 @@ const SellInput = ({ sellNumber }) => {
         {code.map((e, i) => {
           return (
             <Sell
+              focus={focus}
+              setFocus={setFocus}
               setOtp={setOtp}
               code={code}
               setCode={setCode}
@@ -61,9 +63,29 @@ const SellInput = ({ sellNumber }) => {
     </div>
   );
 };
-const Sell = ({ setOtp, value, code, setCode, focusOrNot, lastIndex }) => {
+const Sell = ({
+  setOtp,
+  value,
+  code,
+  setCode,
+  focusOrNot,
+  lastIndex,
+  focus,
+  setFocus,
+}) => {
   return (
     <input
+      onClick={(e) => {
+        if (lastIndex.current === null) {
+          lastIndex.current = 0;
+        }
+        setFocus(true);
+      }}
+      onBlur={(e) => {
+        lastIndex.current = null;
+        setFocus(false);
+        setCode(new Array(4).fill(''));
+      }}
       autoFocus={true}
       className={focusOrNot ? styles.focusedSell : styles.sell}
       value={value || ''}

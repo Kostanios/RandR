@@ -78,3 +78,14 @@
   display: flex;
   width: 290px;
 }
+
+.sellInputContainer {
+  overflow: hidden;
+  transition: height $transition-time-1s;
+  &Hide {
+    height: 0px;
+  }
+  &Show {
+    height: 140px;
+  }
+}

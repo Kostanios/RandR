@@ -47,9 +47,16 @@ export default () => {
           <SendCodeIcon />
         </div>
       </div>
-
-      {/* <SellInput sellNumber={4} /> */}
-      {codeInputVision ? <SellInput sellNumber={4} /> : <div></div>}
+      <div
+        className={`${styles.sellInputContainer} ${
+          codeInputVision
+            ? styles.sellInputContainerShow
+            : styles.sellInputContainerHide
+        }`}
+      >
+        <SellInput sellNumber={4} />
+      </div>
+      {/* {codeInputVision ? <SellInput sellNumber={4} /> : <div></div>} */}
       <div className={styles.regestrationContainer}>
         <p className={styles.regestrationText}>не зарегестрированы? </p>
         <Link className={styles.regestrationLink} to={`/${RERESTRATION_ROUTE}`}>

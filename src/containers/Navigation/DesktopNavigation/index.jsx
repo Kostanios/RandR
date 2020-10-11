@@ -48,9 +48,15 @@ export default () => {
       <div className={right}>
         {isLogined ? (
           <div
-            onClick={() =>
-              dispatch(setGlobalWindowComponent({ name: USER_PROFILE }))
-            }
+            onClick={() => {
+              dispatch(
+                setGlobalWindowParams({
+                  navigateBeforeClose: '/',
+                  modalView: false,
+                })
+              );
+              dispatch(setGlobalWindowComponent({ name: USER_PROFILE }));
+            }}
             className={profileLink}
           >
             <LogInUser color={ACTIVE_COLOR} />
