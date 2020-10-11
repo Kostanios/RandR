@@ -16,8 +16,7 @@
 .content {
   box-sizing: border-box;
   z-index: 2;
-  background-color: $background-color-white;
-  &LeftSide {
+  &FullWindow {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -27,9 +26,13 @@
     box-shadow: $box-shadow;
   }
   &ModalView {
-    position: relative;
-    padding: 4px;
-    border-radius: 8px;
+    margin-top: calc(55vh - 370px);
+    position: absolute;
+    width: 320px;
+    top: 0;
+    left: -640px;
+    overflow: auto;
+    box-shadow: $box-shadow;
   }
 }
 .background {

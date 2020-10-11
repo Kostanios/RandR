@@ -5,7 +5,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import Logo from 'components/Svg/Logo';
 import LogInUser from '../../../components/Svg/LogInUser';
 import Reservation from '../../../components/Svg/Reservation';
-import { setGlobalWindowComponent } from 'redux/slices/globalWindowSlice';
+import {
+  setGlobalWindowComponent,
+  setGlobalWindowParams,
+} from 'redux/slices/globalWindowSlice';
 import {
   AUTH_ROUTE,
   RESERVATION_ROUTE,
@@ -53,9 +56,24 @@ export default () => {
             <LogInUser color={ACTIVE_COLOR} />
           </div>
         ) : (
-          <Link className={linkText} to={`/${AUTH_ROUTE}`}>
+          <div
+            className={linkText}
+            onClick={() => {
+              dispatch(
+                setGlobalWindowParams({
+                  navigateBeforeClose: '/',
+                  modalView: true,
+                })
+              );
+              dispatch(
+                setGlobalWindowComponent({
+                  name: COMPONENT_LOG_IN,
+                })
+              );
+            }}
+          >
             Войти
-          </Link>
+          </div>
         )}
         <Reservation color={isLogined ? ACTIVE_COLOR : DISABLED_COLOR} />
         <Link
@@ -68,3 +86,8 @@ export default () => {
     </div>
   );
 };
+{
+  /* <Link to={`/${AUTH_ROUTE}`}>
+            Войти
+          </Link> */
+}

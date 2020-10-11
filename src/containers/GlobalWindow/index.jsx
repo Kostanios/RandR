@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { clearGlobalWindowComponent } from 'redux/slices/globalWindowSlice';
@@ -38,9 +38,11 @@ const GlobalWindow = ({ children }) => {
   const [overlayAnimationClass, setOverlayAnimationClass] = useState('');
   const [contentAnimationClass, setContentAnimationClass] = useState('');
   const modalView = useSelector((state) => state.globalWindow.modalView);
-  const navigateBeforeClose = useSelector(
-    (state) => state.globalWindow.navigateBeforeClose
-  );
+  const auth = useSelector((state) => state.auth);
+  const globalWindow = useSelector((state) => state.globalWindow);
+  const navigateBeforeClose = globalWindow.navigateBeforeClose;
+  const globalWindowComponent = globalWindow.component.name;
+
   const closeWindow = () => {
     setOverlayAnimationClass('transition-global-window-out');
     setContentAnimationClass('left-side-menu-transition-out');
@@ -51,6 +53,9 @@ const GlobalWindow = ({ children }) => {
       dispatch(clearGlobalWindowComponent());
     }, 150);
   };
+  useLayoutEffect(() => {
+    if (auth.isLogined && globalWindowComponent === 'LogIn') closeWindow();
+  });
   useEffect(() => {
     const escListener = (event) => {
       if (event.keyCode === ESC_EVENT_KEY_CODE) {
@@ -60,7 +65,12 @@ const GlobalWindow = ({ children }) => {
     document.addEventListener('keydown', escListener, false);
     const timerIn = setTimeout(() => {
       setOverlayAnimationClass('transition-global-window-in');
-      setContentAnimationClass('left-side-menu-transition-in');
+      console.log(modalView);
+      if (modalView) {
+        setContentAnimationClass('left-side-menu-transition-in-model');
+      } else {
+        setContentAnimationClass('left-side-menu-transition-in');
+      }
     }, 0);
     return () => {
       document.removeEventListener('keydown', escListener, false);
@@ -77,7 +87,7 @@ const GlobalWindow = ({ children }) => {
     >
       <div
         className={`${styles.content} ${
-          modalView ? styles.contentModalView : styles.contentLeftSide
+          modalView ? styles.contentModalView : styles.contentFullWindow
         } ${contentAnimationClass}`}
       >
         <div className={styles.closeIcon} onClick={closeWindow}>

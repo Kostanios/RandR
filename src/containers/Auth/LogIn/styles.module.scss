@@ -13,7 +13,7 @@
 .regestrationContainer {
   align-items: center;
   width: 100%;
-  margin-top: 40px;
+  margin-top: 20px;
   border-top: 2px solid #cacaca;
   display: flex;
   flex-direction: column;
@@ -23,7 +23,6 @@
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  width: 95%;
   padding: 20px 15px 50px;
   border-radius: 15px;
   background-color: $background-color-white;
@@ -37,24 +36,6 @@
   text-align: center;
   color: $text-color-main;
 }
-.input {
-  width: 290px;
-  margin-bottom: 40px;
-  font-size: 18px;
-  border-top: none;
-  border-right: none;
-  border-left: none;
-  border-bottom: 2px solid #cacaca;
-
-  outline: none;
-  transition: border-bottom $transition-time-2s;
-  &:hover {
-    border-bottom: 2px solid $border-color-green-hover;
-  }
-  &:focus {
-    border-bottom: 2px solid $border-color-green;
-  }
-}
 
 .text {
   margin-top: 20px;
@@ -63,4 +44,37 @@
   line-height: 17px;
   text-decoration: underline;
   color: #000000;
+}
+
+.telephoneInput {
+  display: flex;
+}
+
+.codeRequestButton {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 20px 20px 0;
+  right: 14px;
+  position: absolute;
+  width: 60px;
+  height: 50px;
+  background-color: #2dbb54;
+}
+
+.codeInput {
+  height: 50px;
+  border-radius: 20px;
+  width: 290px;
+  margin-bottom: 40px;
+  font-size: 18px;
+  outline: none;
+  border: 3px solid $border-color-green;
+  transition: border $transition-time-1s;
+}
+
+.codeInputContainer {
+  display: flex;
+  width: 290px;
 }

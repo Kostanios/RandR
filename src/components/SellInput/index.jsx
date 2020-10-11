@@ -25,9 +25,9 @@ const SellInput = ({ sellNumber }) => {
   async function answerCheck() {
     _confirmOtp();
   }
-  useLayoutEffect(() => {
-    if (auth.isLogined) history.push('/');
-  });
+  // useLayoutEffect(() => {
+  //   if (auth.isLogined) history.push('/');
+  // });
   useEffect(() => {
     if (code.join('').length === 4) {
       lastIndex.current = 0;

@@ -32,11 +32,10 @@ const SpotPage = () => {
     return <SpotPageStub />;
   }
   console.log(currentSpot);
-  // const headerPhoto =
-  //   currentSpot.images && currentSpot.images.length
-  //     ? currentSpot.images[0]
-  //     : NoPhoto;
-
+  //const headerPhoto =
+  //  currentSpot.images && currentSpot.images.length
+  //    ? currentSpot.images[0]
+  //    : NoPhoto;
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
@@ -212,7 +211,9 @@ export const SpotPageTrigger = () => {
   console.log('spotId-' + spotId);
   useEffect(() => {
     dispatch(setCurrentSpot({ id: spotId }));
-    dispatch(setGlobalWindowParams({ navigateBeforeClose: '/' }));
+    dispatch(
+      setGlobalWindowParams({ navigateBeforeClose: '/', modalView: false })
+    );
     dispatch(setGlobalWindowComponent({ name: COMPONENT_SPOT_PAGE }));
     return () => {
       dispatch(clearGlobalWindowComponent());

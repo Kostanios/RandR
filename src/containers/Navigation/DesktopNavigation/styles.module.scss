@@ -74,6 +74,7 @@
   font-size: 20px;
   line-height: 24px;
   letter-spacing: 0.05em;
+  cursor: pointer;
   &.active {
     color: $text-color-green;
   }
@@ -104,4 +105,5 @@
 
 .profileLink {
   margin-right: 10px;
+  cursor: pointer;
 }

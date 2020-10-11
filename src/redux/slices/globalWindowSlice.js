@@ -11,7 +11,7 @@ export const globalWindowSlice = createSlice({
   name: 'globalWindow',
   initialState: {
     component: {},
-    navigateBeforeClose: null,
+    navigateBeforeClose: false,
     modalView: false,
     galeryComponentLimit: 4,
   },
