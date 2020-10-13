@@ -11,7 +11,7 @@ import { COMPONENT_SPOT_PAGE } from 'utils/constants/components';
 import { RUdays } from 'utils/constants/RUdays';
 import config from 'api/config';
 import StarIcon from '../../components/Svg/StarIcon';
-import { info, reviews } from './const/const';
+import { info, reviews, menu } from './const/const';
 import NoPhoto from 'utils/assets/no-photo.png';
 import ActionButton from 'components/ActionButton';
 import ChooseLine from './chooseLIne/index';
@@ -62,8 +62,10 @@ const SpotPage = () => {
         <InfoComponent currentSpot={currentSpot} />
       ) : page === reviews ? (
         <div>отзывы</div>
+      ) : page === menu ? (
+        <div>меню</div>
       ) : (
-        <div></div>
+        <div> </div>
       )}
     </div>
   );

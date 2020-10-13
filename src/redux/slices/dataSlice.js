@@ -5,6 +5,7 @@ import {
   GET_DATA_THUNK,
   GET_SPOT_BY_ID_THUNK,
   UPDATE_DATA,
+  SET_FILTERED_SPOT_DATA,
 } from 'utils/constants/reducers';
 
 export const getDataThunk = createAsyncThunk(GET_DATA_THUNK, async () => {
@@ -25,6 +26,7 @@ export const spotSlice = createSlice({
   name: 'data',
   initialState: {
     id: undefined,
+    filteredSpotsData: [],
     currentSpot: undefined,
     isLoading: false,
     selections: [],
@@ -54,6 +56,16 @@ export const spotSlice = createSlice({
         };
       }
     },
+    [SET_FILTERED_SPOT_DATA]: (state, action) => {
+      if (typeof action.payload.searchStr === 'string') {
+        const searchStr = action.payload.searchStr;
+        const filteredSpotsData = state.spotsData.filter((item) => {
+          return item.name.toLowerCase().includes(searchStr.toLowerCase());
+        });
+        if (filteredSpotsData.length > 0)
+          state.filteredSpotsData = filteredSpotsData;
+      }
+    },
   },
   extraReducers: {
     [getDataThunk.pending]: (state) => {
@@ -63,6 +75,7 @@ export const spotSlice = createSlice({
     },
     [getDataThunk.fulfilled]: (state, action) => {
       if (state.isLoading) {
+        state.filteredSpotsData = action.payload.data;
         state.spotsData = action.payload.data;
         state.filters = action.payload.filters;
         state.selections = action.payload.selections;
@@ -90,6 +103,10 @@ export const spotSlice = createSlice({
   },
 });
 
-export const { setCurrentSpot, updateData } = spotSlice.actions;
+export const {
+  setCurrentSpot,
+  updateData,
+  setFilteredSpotData,
+} = spotSlice.actions;
 
 export default spotSlice.reducer;

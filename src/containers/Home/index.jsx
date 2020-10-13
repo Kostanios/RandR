@@ -14,7 +14,7 @@ import Footer from 'containers/Footer';
 
 export default () => {
   const dispatch = useDispatch();
-  const spotsData = useSelector((state) => state.data.spotsData);
+  const spotsData = useSelector((state) => state.data.filteredSpotsData);
   useEffect(() => {
     dispatch(getDataThunk());
     // eslint-disable-next-line

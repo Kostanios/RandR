@@ -6,16 +6,15 @@ import Filters from '../../components/Svg/Filters';
 import styles from './styles.module.scss';
 import FilterModal from '../../components/FilterModal';
 import { updateData } from '../../redux/slices/dataSlice';
-
 import LocationArrow from '../../components/Svg/LocationArrow';
+import { SearchComponent } from './searchComponent';
 
-const SearchBar = () => {
+const SearchBar = ({ restaurants }) => {
   const dispatch = useDispatch();
   const filters = useSelector((state) => state.data.filters);
-  const [searchString, setSearchString] = useState('');
   const [hasFocus, toggleFocus] = useState(false);
-  const refFilter = useRef(null);
 
+  const refFilter = useRef(null);
   const filterSpots = (filterName) => {
     console.log(filterName);
     dispatch(updateData(filterName));
@@ -31,15 +30,7 @@ const SearchBar = () => {
         <div className={styles.searchIcon}>
           <SearchIcon width="32px" height="32px" />
         </div>
-        <input
-          type="text"
-          placeholder="Введите название..."
-          className={styles.searchBarInput}
-          value={searchString}
-          onChange={(event) => setSearchString(event.currentTarget.value)}
-          onFocus={() => toggleFocus(true)}
-          onBlur={() => toggleFocus(false)}
-        />
+        <SearchComponent hasFocus={hasFocus} toggleFocus={toggleFocus} />
       </div>
       <div className={styles.filtersContainer}>
         <button ref={refFilter} type="button" className={styles.filtersButton}>

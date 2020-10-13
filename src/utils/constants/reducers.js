@@ -32,5 +32,5 @@ export const SET_BOTTOM_SHEET_POSITION = 'setBottomSheetPosition';
 export const SET_CURRENT_SPOT = 'setCurrentSpot';
 export const GET_DATA_THUNK = 'getDataThunk';
 export const GET_SPOT_BY_ID_THUNK = 'getSpotByIdThunk';
-export const SET_PENDING_CARDS = 'setPendingCards';
 export const UPDATE_DATA = 'updateData';
+export const SET_FILTERED_SPOT_DATA = 'setFilteredSpotData';

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
 import { setUserLocation } from 'redux/slices/appSlice';
 import { authThunk } from 'redux/slices/authSlice';
-import Map from 'containers/Map';
+//import Map from 'containers/Map';
 import Home from 'containers/Home';
 import Favorite from 'containers/Favorite';
 import Navigation from 'containers/Navigation';
@@ -61,7 +61,7 @@ const App = () => {
       >
         <CacheSwitch className={styles.wrapperInner}>
           <Route path={`/${FAVORITE_ROUTE}`} component={Favorite} />
-          <CacheRoute path={`/${MAP_ROUTE}`} when="always" component={Map} />
+          {/* <CacheRoute path={`/${MAP_ROUTE}`} when="always" component={Map} /> */}
           <Route path={`/${AUTH_ROUTE}`} component={Auth} />
           <Route path={`/${CONFIRM_ROUTE}`} component={Confirm} />
           <Route path={`/${RERESTRATION_ROUTE}`} component={Regestration} />

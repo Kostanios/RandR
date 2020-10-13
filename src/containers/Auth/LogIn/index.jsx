@@ -6,7 +6,7 @@ import { ReactTelephoneInput } from 'react-telephone-input';
 import { RERESTRATION_ROUTE, CONFIRM_ROUTE } from 'utils/constants/routeNames';
 import { setPhone } from 'redux/slices/authSlice';
 import { requestOtpThunk } from 'redux/slices/authSlice';
-import ActionButton from 'components/ActionButton';
+import Logo from 'components/Svg/Logo';
 import styles from './styles.module.scss';
 import './styles.module.scss';
 import './default.scss';
@@ -31,7 +31,11 @@ export default () => {
 
   return (
     <div className={styles.wrapper}>
-      <p className={styles.textHeading}>Reserve And Relax</p>
+      <div className={styles.LogoContainer}>
+        <Logo />
+      </div>
+      <p className={styles.textHeading}>присоединяйся к RandR</p>
+      <p className={styles.textHeadingTelephone}>укажите номер телефона</p>
       <div className={styles.telephoneInput}>
         <ReactTelephoneInput
           preferredCountries={['by', 'ru', 'ua']}
@@ -64,6 +68,10 @@ export default () => {
           Регестрация RandR{' '}
         </Link>
       </div>
+      <p className={styles.textHeading}>
+        Регестрируясь на данном сайте вы принимаете{' '}
+        <a>пользовательское соглашение</a>
+      </p>
     </div>
   );
 };
