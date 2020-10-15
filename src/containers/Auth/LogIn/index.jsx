@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReactTelephoneInput } from 'react-telephone-input';
 
-import { RERESTRATION_ROUTE, CONFIRM_ROUTE } from 'utils/constants/routeNames';
 import { setPhone } from 'redux/slices/authSlice';
 import { requestOtpThunk } from 'redux/slices/authSlice';
 import Logo from 'components/Svg/Logo';
@@ -60,16 +58,8 @@ export default () => {
       >
         <SellInput sellNumber={4} />
       </div>
-      {/* {codeInputVision ? <SellInput sellNumber={4} /> : <div></div>} */}
-      <div className={styles.regestrationContainer}>
-        <p className={styles.regestrationText}>не зарегестрированы? </p>
-        <Link className={styles.regestrationLink} to={`/${RERESTRATION_ROUTE}`}>
-          {' '}
-          Регестрация RandR{' '}
-        </Link>
-      </div>
       <p className={styles.textHeading}>
-        Регестрируясь на данном сайте вы принимаете{' '}
+        Регистрируясь на данном сайте вы принимаете{' '}
         <a>пользовательское соглашение</a>
       </p>
     </div>

@@ -7,7 +7,6 @@ import { SpotPageTrigger } from 'containers/SpotPage';
 import { getDataThunk } from 'redux/slices/dataSlice';
 import formSpotsCards from 'utils/formSpotsCards/index';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
-import { CacheSwitch } from 'react-router-cache-route/index';
 import styles from './styles.module.scss';
 import Collections from '../Collections';
 import Footer from 'containers/Footer';

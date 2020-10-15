@@ -11,6 +11,10 @@ const Collections = () => {
     slidesPerView: 1,
     spaceBetween: 30,
     loop: true,
+    autoplay: {
+      delay: 6000,
+      disableOnInteraction: false,
+    },
     slidesPerView: 'auto',
     navigation: {
       nextEl: '.swiper-button-next',

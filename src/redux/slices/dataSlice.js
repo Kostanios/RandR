@@ -60,7 +60,9 @@ export const spotSlice = createSlice({
       if (typeof action.payload.searchStr === 'string') {
         const searchStr = action.payload.searchStr;
         const filteredSpotsData = state.spotsData.filter((item) => {
-          return item.name.toLowerCase().includes(searchStr.toLowerCase());
+          return item.name
+            .toLowerCase()
+            .includes(searchStr.toLowerCase().trim());
         });
         if (filteredSpotsData.length > 0)
           state.filteredSpotsData = filteredSpotsData;
