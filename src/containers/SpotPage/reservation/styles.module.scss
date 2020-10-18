@@ -1,0 +1,73 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.dateTable {
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.timeSell {
+  padding: 3px;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 40px;
+  margin: 3px;
+  height: 20px;
+  background-color: #f8f8f8;
+  &Choosed {
+    padding: 3px;
+    cursor: default;
+    border-radius: 10px;
+    width: 40px;
+    margin: 3px;
+    height: 20px;
+    background-color: #2dbb54;
+  }
+}
+.timeTable {
+  width: 290px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.restaurantName {
+  padding: 15px 0px;
+  text-align: center;
+  background-color: #2dbb54;
+  border-radius: 15px 15px 0 0;
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 15px;
+}
+.changePersonButton {
+  cursor: pointer;
+  margin: 0 10px;
+  color: #d7d7d7;
+  font-size: 30px;
+}
+.changePersonContainer {
+  align-items: center;
+  border-radius: 15px;
+  background-color: #f8f8f8;
+  user-select: none;
+  display: flex;
+  justify-content: space-around;
+}
+.containerDatePersons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.personNumber {
+  margin: 0 20px;
+}
+.setDateContainer {
+  padding: 0 10px;
+  border-radius: 15px;
+  background-color: #f8f8f8;
+}

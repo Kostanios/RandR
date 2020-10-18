@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+
 import { setCurrentSpot, getSpotByIdThunk } from 'redux/slices/dataSlice';
 import {
   setGlobalWindowComponent,
@@ -17,9 +18,11 @@ import ActionButton from 'components/ActionButton';
 import ChooseLine from './chooseLIne/index';
 import styles from './styles.module.scss';
 import Slider from './slider/index';
+import { Reservation } from './reservation';
 
 const SpotPage = () => {
   const [page, setPage] = useState(info);
+  const [reservationVisibility, setReservationVisibility] = useState(false);
   const currentId = useSelector((state) => state.data.id);
   const currentSpot = useSelector((state) => state.data.currentSpot);
   useEffect(() => {
@@ -55,8 +58,21 @@ const SpotPage = () => {
           <ChooseLine page={page} setPage={setPage} />
         </div>
         <div className={styles.actionButtonContainer}>
-          <ActionButton fullWidth buttonText="Забронировать стол" />
+          <ActionButton
+            callback={() => {
+              setReservationVisibility(true);
+            }}
+            fullWidth
+            buttonText="Забронировать стол"
+          />
         </div>
+      </div>
+      <div
+        className={
+          reservationVisibility ? styles.reservation : styles.reservationHide
+        }
+      >
+        <Reservation currentSpot={currentSpot} />
       </div>
       {page === info ? (
         <InfoComponent currentSpot={currentSpot} />

@@ -27,6 +27,12 @@
     }
   }
 }
+.reservation {
+  transition: height 0.1s ease;
+  &Hide {
+    height: 0;
+  }
+}
 .headerContent {
   position: relative;
   z-index: 2;
