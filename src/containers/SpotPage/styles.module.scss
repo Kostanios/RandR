@@ -30,6 +30,7 @@
 .reservation {
   transition: height 0.1s ease;
   &Hide {
+    overflow: hidden;
     height: 0;
   }
 }

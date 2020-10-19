@@ -49,16 +49,24 @@ const DateTable = ({ currentSpot }) => {
           </span>
         </div>
       </div>
-      <TimeSells chooseTime={chooseTime} currentSpot={currentSpot} />
+      <TimeSells
+        chooseTime={chooseTime}
+        currentSpot={currentSpot}
+        choosedDate={choosedDate}
+      />
     </div>
   );
 };
 
-const TimeSells = ({ currentSpot, chooseTime }) => {
+const TimeSells = ({ currentSpot, chooseTime, choosedDate }) => {
+  const currentDate = new Date();
   const choosedSellIndex = useRef(null);
   return currentSpot.timetable[2] ? (
     <div className={styles.timeTable}>
       {currentSpot.timetable[2].map((time, sellIndex) => {
+        {
+          /* if(choosedDate.getDate() === currentDate.getDate() && currentDate.getHours()*60+currentDate.getMinutes() */
+        }
         if (choosedSellIndex.current === sellIndex) {
           return <div className={styles.timeSellChoosed}> {time} </div>;
         } else {
