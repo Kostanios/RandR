@@ -34,7 +34,6 @@ export const Reservation = ({ currentSpot }) => {
   return (
     <div className={styles.container}>
       <div className={styles.dateTable}>
-        <div className={styles.restaurantName}>{currentSpot.name}</div>
         <DateTable
           choosedTime={choosedTime}
           chooseTime={chooseTime}

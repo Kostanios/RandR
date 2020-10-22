@@ -73,6 +73,7 @@ const SpotPage = () => {
           reservationVisibility ? styles.reservation : styles.reservationHide
         }
       >
+        <div className={styles.restaurantName}>{currentSpot.name}</div>
         <Reservation currentSpot={currentSpot} />
       </div>
       {page === info ? (
