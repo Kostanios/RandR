@@ -3,8 +3,8 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  border-radius: 0 0 15px 15px;
 }
-
 .dateTable {
   width: 300px;
   display: flex;
@@ -70,4 +70,33 @@
   padding: 0 10px;
   border-radius: 15px;
   background-color: #f8f8f8;
+}
+.UserContentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 310px;
+}
+.userFooter {
+  display: flex;
+}
+.userContent {
+  padding: 4px;
+  outline: none;
+  border-radius: 10px;
+  background-color: #f8f8f8;
+  width: 135px;
+  margin: 1px;
+  border-color: transparent;
+}
+.userComent {
+  resize: none;
+  padding: 4px;
+  outline: none;
+  border-radius: 10px;
+  background-color: #f8f8f8;
+  width: 288px;
+  height: 100px;
+  margin: 5px;
+  border-color: transparent;
 }

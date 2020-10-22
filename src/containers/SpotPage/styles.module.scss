@@ -28,6 +28,9 @@
   }
 }
 .reservation {
+  margin: 20px 5px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
   transition: height 0.1s ease;
   &Hide {
     overflow: hidden;

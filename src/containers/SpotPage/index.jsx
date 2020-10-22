@@ -63,7 +63,8 @@ const SpotPage = () => {
               setReservationVisibility(true);
             }}
             fullWidth
-            buttonText="Забронировать стол"
+            disabled={reservationVisibility}
+            buttonText="занять столик"
           />
         </div>
       </div>
