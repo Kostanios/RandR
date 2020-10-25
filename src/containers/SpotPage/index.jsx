@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-
+import { useQuery } from '@apollo/client';
 import { setCurrentSpot, getSpotByIdThunk } from 'redux/slices/dataSlice';
 import {
   setGlobalWindowComponent,
@@ -19,22 +19,24 @@ import ChooseLine from './chooseLIne/index';
 import styles from './styles.module.scss';
 import Slider from './slider/index';
 import { Reservation } from './reservation';
+import { GET_CURRENT_SPOT } from 'api/GQL/queries';
 
 const SpotPage = () => {
   const [page, setPage] = useState(info);
   const [reservationVisibility, setReservationVisibility] = useState(false);
   const currentId = useSelector((state) => state.data.id);
-  const currentSpot = useSelector((state) => state.data.currentSpot);
+  const { data, error } = useQuery(GET_CURRENT_SPOT(currentId));
+  const currentData = data;
   useEffect(() => {
     if (typeof currentId === 'number') {
       getSpotByIdThunk(currentId);
     }
     // eslint-disable-next-line
-  }, [currentId, currentSpot]);
-  if (!currentSpot) {
+  }, [currentId, currentData]);
+  if (!currentData) {
     return <SpotPageStub />;
   }
-  console.log(currentSpot);
+  const currentSpot = data.spot;
   //const headerPhoto =
   //  currentSpot.images && currentSpot.images.length
   //    ? currentSpot.images[0]
@@ -228,7 +230,6 @@ const SpotPageStub = () => (
 export const SpotPageTrigger = () => {
   const dispatch = useDispatch();
   const { spotId } = useParams();
-  console.log('spotId-' + spotId);
   useEffect(() => {
     dispatch(setCurrentSpot({ id: spotId }));
     dispatch(

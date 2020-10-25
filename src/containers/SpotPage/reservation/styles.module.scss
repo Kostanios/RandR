@@ -30,7 +30,6 @@
   }
 }
 .timeTable {
-  width: 290px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -50,6 +49,7 @@
   justify-content: space-around;
 }
 .containerDatePersons {
+  margin: 5px 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -90,4 +90,8 @@
   height: 100px;
   margin: 5px;
   border-color: transparent;
+}
+.advice {
+  height: 20px;
+  margin: 15px 0;
 }

@@ -27,10 +27,10 @@ function formWithoutIconsItems(spot) {
   return items;
 }
 
-export default function (baseUrl, spotsData) {
+export default function (baseUrl, data) {
   let formedCards = [];
-  if (spotsData.length) {
-    formedCards = spotsData.map((spot) => {
+  if (data && data.spots.length) {
+    formedCards = data.spots.map((spot) => {
       const photo =
         spot.images && spot.images.length ? spot.images[0] : NoPhoto;
       return (

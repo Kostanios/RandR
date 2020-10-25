@@ -124,6 +124,7 @@ const TimeSells = ({ currentSpot, chooseTime, choosedDate }) => {
         } else {
           return (
             <div
+              key={sellIndex}
               onClick={() => {
                 choosedSellIndex.current = sellIndex;
                 chooseTime(time);

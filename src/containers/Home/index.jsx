@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { useQuery } from '@apollo/client';
+import { GET_SPOTS } from 'api/GQL/queries';
 import { useDispatch, useSelector } from 'react-redux';
 import SearchBar from 'containers/SearchBar';
 import FeedTape from 'components/Feed';
@@ -12,14 +14,15 @@ import Collections from '../Collections';
 import Footer from 'containers/Footer';
 
 export default () => {
-  const dispatch = useDispatch();
-  const spotsData = useSelector((state) => state.data.filteredSpotsData);
-  useEffect(() => {
-    dispatch(getDataThunk());
-    // eslint-disable-next-line
-  }, []);
+  // const dispatch = useDispatch();
+  // let spotsData = useSelector((state) => state.data.filteredSpotsData);
+  // useEffect(() => {
+  //   dispatch(getDataThunk());
+  //   // eslint-disable-next-line
+  // }, []);
+  const { data } = useQuery(GET_SPOTS);
   const routeMatch = useRouteMatch();
-  const formedCards = formSpotsCards(routeMatch.url, spotsData);
+  const formedCards = formSpotsCards(routeMatch.url, data);
   return (
     <div className={styles.homepage}>
       <Collections />

@@ -39,7 +39,6 @@ const Collections = () => {
       <CollectionCard key={selection} selection={selection} image={image} />
     );
   });
-  console.log(cardsCollection);
   return (
     <>
       <h2 className={styles.title}>Подборки</h2>
